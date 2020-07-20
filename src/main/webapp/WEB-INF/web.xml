@@ -1,0 +1,182 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>by.epam.corporate_education.controller.filter.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>by.epam.corporate_education.controller.ApplicationListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>by.epam.corporate_education.controller.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/controller</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>/index.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>SignIn</servlet-name>
+        <jsp-file>/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignIn</servlet-name>
+        <url-pattern>/sign-in</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MainPage</servlet-name>
+        <jsp-file>/WEB-INF/jsp/main-page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainPage</servlet-name>
+        <url-pattern>/main-page</url-pattern>
+    </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/jsp/error.jsp</location>
+    </error-page>
+    <servlet>
+        <servlet-name>Error404</servlet-name>
+        <jsp-file>/WEB-INF/jsp/error.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Error404</servlet-name>
+        <url-pattern>/error-404</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TrainingsPage</servlet-name>
+        <jsp-file>/WEB-INF/jsp/trainings-page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TrainingsPage</servlet-name>
+        <url-pattern>/trainings-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RestorePassword</servlet-name>
+        <jsp-file>/restore-password.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RestorePassword</servlet-name>
+        <url-pattern>/restore-password</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignUp</servlet-name>
+        <jsp-file>/sign-up.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignUp</servlet-name>
+        <url-pattern>/sign-up</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UsersPage</servlet-name>
+        <jsp-file>/WEB-INF/jsp/users-page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UsersPage</servlet-name>
+        <url-pattern>/users-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserPage</servlet-name>
+        <jsp-file>/WEB-INF/jsp/user-page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserPage</servlet-name>
+        <url-pattern>/user-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TrainingPage</servlet-name>
+        <jsp-file>/WEB-INF/jsp/training-page.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TrainingPage</servlet-name>
+        <url-pattern>/training-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AjaxController</servlet-name>
+        <servlet-class>by.epam.corporate_education.controller.AjaxController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AjaxController</servlet-name>
+        <url-pattern>/ajax-controller</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditTraining</servlet-name>
+        <jsp-file>/WEB-INF/jsp/edit-training.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditTraining</servlet-name>
+        <url-pattern>/edit-training</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EnrollTraining</servlet-name>
+        <jsp-file>/WEB-INF/jsp/enroll-training.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EnrollTraining</servlet-name>
+        <url-pattern>/enroll-training</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>QueriesPage</servlet-name>
+        <jsp-file>/WEB-INF/jsp/queries-page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QueriesPage</servlet-name>
+        <url-pattern>/queries-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TrainerTrainingsPage</servlet-name>
+        <jsp-file>/WEB-INF/jsp/trainer-trainings-page.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TrainerTrainingsPage</servlet-name>
+        <url-pattern>/trainer-trainings-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TrainingQueries</servlet-name>
+        <jsp-file>/WEB-INF/jsp/training-queries.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TrainingQueries</servlet-name>
+        <url-pattern>/training-queries</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
