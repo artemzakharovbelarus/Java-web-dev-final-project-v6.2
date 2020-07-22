@@ -8,6 +8,7 @@ import by.epam.corporate_education.entity.Query;
 import by.epam.corporate_education.entity.Training;
 import by.epam.corporate_education.service.api.TrainerService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,13 @@ import java.util.List;
 public class TrainerServiceImpl implements TrainerService {
     private DAOFactory daoFactory = DAOFactory.getINSTANCE();
 
+    @Setter
+    private QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
+    @Setter
+    private TrainingDAO trainingDAO = daoFactory.getTrainingDAOImpl();
+
     @Override
     public void setQueryAnswer(int idQuery, int answer) throws ServiceException {
-        QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
-
         try{
             queryDAO.changeAcceptedStatus(idQuery, answer);
         } catch (DAOException e){
@@ -28,8 +32,6 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public List<Query> getTrainingQueries(int idTraining) throws ServiceException {
-        QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
-
         List<Query> queries = new ArrayList<>();
         try{
             queries = queryDAO.getTrainingQueries(idTraining);
@@ -41,8 +43,6 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public List<Training> getAllTrainerTrainings(int idTrainer) throws ServiceException {
-        TrainingDAO trainingDAO = daoFactory.getTrainingDAOImpl();
-
         List<Training> trainings = new ArrayList<>();
         try{
 
@@ -52,4 +52,6 @@ public class TrainerServiceImpl implements TrainerService {
         }
         return trainings;
     }
+
+
 }

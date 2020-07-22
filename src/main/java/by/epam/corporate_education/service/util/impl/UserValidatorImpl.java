@@ -28,19 +28,23 @@ public class UserValidatorImpl implements UserValidator {
         }
     }
 
-    private boolean validateUsername(String username) {
+    @Override
+    public boolean validateUsername(String username) {
         return username.matches(USERNAME_FORMAT_REGEX);
     }
 
-    private boolean validateEmail(String email) {
+    @Override
+    public boolean validateEmail(String email) {
         return email.matches(EMAIL_FORMAT_REGEX);
     }
 
-    private boolean validatePassword(String password) {
+    @Override
+    public boolean validatePassword(String password) {
         return password.matches(PASSWORD_FORMAT_REGEX);
     }
 
-    private boolean checkEquivalence(String password, String confirmedPassword) {
+    @Override
+    public boolean checkEquivalence(String password, String confirmedPassword) {
         return password.equals(confirmedPassword);
     }
 }

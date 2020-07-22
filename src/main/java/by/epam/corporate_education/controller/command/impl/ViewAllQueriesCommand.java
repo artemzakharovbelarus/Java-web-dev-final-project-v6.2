@@ -35,7 +35,7 @@ public class ViewAllQueriesCommand implements Command {
         try {
             if (numberChecker.isNumber(idUser)){
                 int idUserInt = Integer.parseInt(idUser);
-                queries = userService.getAllQueries(idUserInt);
+                queries = userService.viewAllQueries(idUserInt);
                 attributesInitializer.setRequestAttributesQueries(request, queries);
                 path = pathCreator.getQueries();
             }

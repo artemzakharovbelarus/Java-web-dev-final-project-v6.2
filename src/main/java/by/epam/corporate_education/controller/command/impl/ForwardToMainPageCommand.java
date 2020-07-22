@@ -30,7 +30,7 @@ public class ForwardToMainPageCommand implements Command {
 
         List<NewsItem> news = new ArrayList<>();
         try {
-            news = userService.getAllNews();
+            news = userService.viewAllNews();
             attributesInitializer.setRequestAttributesNews(request, news);
             path = pathCreator.getMainPage();
         } catch (ServiceException e) {

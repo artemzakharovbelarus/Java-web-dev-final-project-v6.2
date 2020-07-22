@@ -10,4 +10,8 @@ public interface UserValidator {
     public void validateSignUp(String username, String email, String password, String confirmedPassword)
             throws InvalidUsernameException, InvalidEmailException,
             InvalidPasswordException, EquivalencePasswordException;
+    public boolean validateUsername(String username);
+    public boolean validateEmail(String email);
+    public boolean validatePassword(String password);
+    public boolean checkEquivalence(String password, String confirmedPassword);
 }

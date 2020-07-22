@@ -1,5 +1,6 @@
 package by.epam.corporate_education.service.api;
 
+import by.epam.corporate_education.dao.api.*;
 import by.epam.corporate_education.entity.NewsItem;
 import by.epam.corporate_education.entity.Query;
 import by.epam.corporate_education.entity.Training;
@@ -14,10 +15,10 @@ public interface UserService {
     public void signOut(int idUser, boolean status) throws ServiceException;
     public int signUp(String username, String email, String password, String confirmedPassword) throws ServiceException;
     public List<Training> viewAllTrainings() throws ServiceException;
-    public List<NewsItem> getAllNews() throws ServiceException;
+    public List<NewsItem> viewAllNews() throws ServiceException;
     public Training getTraining(int idTraining) throws ServiceException;
     public void writeQuery(int idTraining, int idUser) throws ServiceException;
-    public List<Query> getAllQueries(int idUser) throws ServiceException;
+    public List<Query> viewAllQueries(int idUser) throws ServiceException;
     public void undoQuery(int idQuery) throws ServiceException;
     public Query getQueryByIdTrainingIdUser(int idTraining, int idUser) throws ServiceException;
     public void addTrainingLike(int idTraining, int idUser) throws ServiceException;

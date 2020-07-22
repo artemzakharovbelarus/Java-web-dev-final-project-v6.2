@@ -10,20 +10,35 @@ import by.epam.corporate_education.service.util.ServiceUtilFactory;
 import by.epam.corporate_education.service.util.ValidatorManager;
 import by.epam.corporate_education.service.util.api.PasswordEncoder;
 import by.epam.corporate_education.service.util.api.UserValidator;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
+
     private DAOFactory daoFactory = DAOFactory.getINSTANCE();
+    @Setter
     private ServiceUtilFactory utilFactory = ServiceUtilFactory.getINSTANCE();
     private ValidatorManager validatorManager = utilFactory.getValidatorManager();
     private PasswordEncoder passwordEncoder = utilFactory.getEncoder();
 
+    @Setter
+    private LikeDAO likeDAO = daoFactory.getLikeDAOImpl();
+    @Setter
+    private DislikeDAO dislikeDAO = daoFactory.getDislikeDAOImpl();
+    @Setter
+    private QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
+    @Setter
+    private UserDAO userDAO = daoFactory.getUserDAOImpl();
+    @Setter
+    private NewsDAO newsDAO = daoFactory.getNewsDAOImpl();
+    @Setter
+    private TrainingDAO trainingDAO = daoFactory.getTrainingDAOImpl();
+
     @Override
     public void putOffLike(int idTraining, int idUser) throws ServiceException {
-        LikeDAO likeDAO = daoFactory.getLikeDAOImpl();
 
         Like like = new Like(idUser, idTraining);
         try{
@@ -35,7 +50,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void putOffDislike(int idTraining, int idUser) throws ServiceException {
-        DislikeDAO dislikeDAO = daoFactory.getDislikeDAOImpl();
 
         Dislike dislike = new Dislike(idUser, idTraining);
         try {
@@ -47,7 +61,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isLikeEnabled(int idTraining, int idUser) throws ServiceException {
-        LikeDAO likeDAO = daoFactory.getLikeDAOImpl();
 
         Like like = new Like(idUser, idTraining);
         boolean isEnabled = false;
@@ -61,7 +74,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isDislikeEnabled(int idTraining, int idUser) throws ServiceException {
-        DislikeDAO dislikeDAO = daoFactory.getDislikeDAOImpl();
 
         Dislike dislike = new Dislike(idUser, idTraining);
         boolean isEnabled = false;
@@ -75,7 +87,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addTrainingDislike(int idTraining, int idUser) throws ServiceException {
-        DislikeDAO dislikeDAO = daoFactory.getDislikeDAOImpl();
 
         Dislike dislike = new Dislike(idUser, idTraining);
         try {
@@ -87,7 +98,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addTrainingLike(int idTraining, int idUser) throws ServiceException {
-        LikeDAO likeDAO = daoFactory.getLikeDAOImpl();
 
         Like like = new Like(idUser, idTraining);
         try {
@@ -99,7 +109,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Query getQueryByIdTrainingIdUser(int idTraining, int idUser) throws ServiceException {
-        QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
 
         Query query = new Query();
         try{
@@ -112,7 +121,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void undoQuery(int idQuery) throws ServiceException {
-        QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
 
         try{
             queryDAO.changeCanceledStatus(idQuery);
@@ -122,8 +130,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Query> getAllQueries(int idUser) throws ServiceException {
-        QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
+    public List<Query> viewAllQueries(int idUser) throws ServiceException {
         List<Query> queries = new ArrayList<>();
 
         try {
@@ -136,7 +143,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void writeQuery(int idTraining, int idUser) throws ServiceException {
-        QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
 
         Query query = new Query(idTraining, idUser);
         try{
@@ -148,7 +154,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void signOut(int idUser, boolean status) throws ServiceException {
-        UserDAO userDAO = daoFactory.getUserDAOImpl();
         try{
             userDAO.changeOnlineStatus(idUser, status);
         } catch (DAOException e){
@@ -158,7 +163,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Training getTraining(int idTraining) throws ServiceException {
-        TrainingDAO trainingDAO = daoFactory.getTrainingDAOImpl();
         Training training = new Training();
         try{
             training = trainingDAO.getTraining(idTraining);
@@ -169,8 +173,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<NewsItem> getAllNews() throws ServiceException {
-        NewsDAO newsDAO = daoFactory.getNewsDAOImpl();
+    public List<NewsItem> viewAllNews() throws ServiceException {
         List<NewsItem> news = new ArrayList<>();
         try {
             news = newsDAO.getAllNews();
@@ -182,7 +185,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User signIn(String username, String password) throws ServiceException {
-        UserDAO userDAO = daoFactory.getUserDAOImpl();
         User user = new User();
 
         try {
@@ -203,7 +205,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int signUp(String username, String email, String password, String confirmedPassword) throws ServiceException {
-        UserDAO userDAO = daoFactory.getUserDAOImpl();
 
         UserValidator userValidator = validatorManager.getUserValidator();
         userValidator.validateSignUp(username, email, password, confirmedPassword);
@@ -227,7 +228,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Training> viewAllTrainings() throws ServiceException {
-        TrainingDAO trainingDAO = daoFactory.getTrainingDAOImpl();
         List<Training> trainings = new ArrayList<>();
 
         try{

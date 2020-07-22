@@ -7,6 +7,7 @@ import by.epam.corporate_education.service.util.impl.PasswordEncoderImpl;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServiceUtilFactory {
@@ -15,8 +16,9 @@ public class ServiceUtilFactory {
 
     @Getter
     private PasswordEncoder encoder = new PasswordEncoderImpl();
-    @Getter
+    @Getter @Setter
     private ValidatorManager validatorManager = ValidatorManager.getINSTANCE();
     @Getter
     private PagesCounter pagesCounter = new PagesCounterImpl();
+
 }
