@@ -46,7 +46,7 @@ public final class SQLRequest {
             " city = ?, hours_amount = ?, min_members = ?, max_members = ?, start_date = ?, end_date = ?, training_image = ?, " +
             " idUser = ? WHERE idTraining = ?";
     public static final String ADD_QUERY = "INSERT INTO queries (idTraining, idUser) VALUES (?, ?)";
-    public static final String GET_ALL_QUERIES_BY_ID_USER = "SELECT queries.idQuery, queries.idTraining, queries.idUser, queries.canceled_status, " +
+    public static final String GET_ALL_QUERIES_BY_ID_USER = "SELECT queries.idQuery, queries.accepted_status, queries.idTraining, queries.idUser, queries.canceled_status, " +
             "trainings.title, trainings.start_date FROM queries INNER JOIN trainings ON queries.idTraining = trainings.idTraining " +
             "AND queries.idUser = ?";
     public static final String CHANGE_CANCELED_STATUS = "UPDATE queries SET canceled_status = true WHERE idQuery = ?";
@@ -61,5 +61,6 @@ public final class SQLRequest {
     public static final String GET_LIKE_ENABLED_STATUS = "SELECT enabled_status FROM likes WHERE idTraining = ? AND idUser = ?";
     public static final String CHANGE_DISLIKE_ENABLED_STATUS = "UPDATE dislikes SET enabled_status = false WHERE idTraining = ? AND idUser = ?";
     public static final String CHANGE_LIKE_ENABLED_STATUS = "UPDATE likes SET enabled_status = false WHERE idTraining = ? AND idUser = ?";
-    public static final String GET_TRAINING_QUERIES = "SELECT queries.idQuery, queries.accepted_status, users.username, trainings.title, trainings.start_date FROM queries JOIN trainings ON queries.idTraining = trainings.idTraining JOIN users ON queries.idUser = users.idUser WHERE queries.accepted_status = 0 AND queries.canceled_status = false AND queries.idTraining = ?";
+    public static final String GET_TRAINING_QUERIES = "SELECT queries.idQuery, queries.idTraining, queries.accepted_status, users.username, trainings.title, trainings.start_date FROM queries JOIN trainings ON queries.idTraining = trainings.idTraining JOIN users ON queries.idUser = users.idUser WHERE queries.accepted_status = 0 AND queries.canceled_status = false AND queries.idTraining = ?";
+    public static final String CHANGE_ACCEPTED_STATUS = "UPDATE queries SET accepted_status = ? WHERE idQuery = ?";
 }

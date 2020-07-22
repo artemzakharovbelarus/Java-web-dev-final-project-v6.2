@@ -61,15 +61,24 @@
                         <td style="text-align: center; vertical-align: middle;" scope="row">${query.trainingTitle}</td>
                         <td style="text-align: center; vertical-align: middle;" scope="row">${query.startDate}</td>
                         <form action="controller" method="post">
+                            <input type="hidden" name="idTraining" value="${query.idTraining}">
                             <input type="hidden" name="idQuery" value="${query.idQuery}">
+                            <input type="hidden" name="answer" value="2">
                         <td style="text-align: center; vertical-align: middle;" scope="row">
-                            <button type="submit" name="command" value="set-query-answer">
-
+                            <button type="submit" name="command" value="set-query-answer" class="btn btn-outline-success">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                                <fmt:message key="local.accept"/>
                             </button>
                         </td>
-                        <td style="text-align: center; vertical-align: middle;" scope="row">
-                            <button type="submit" name="command" value="set-query-answer">
-
+                        </form>
+                        <form action="controller" method="post">
+                            <input type="hidden" name="idTraining" value="${query.idTraining}">
+                            <input type="hidden" name="idQuery" value="${query.idQuery}">
+                            <input type="hidden" name="answer" value="1">
+                            <td style="text-align: center; vertical-align: middle;" scope="row">
+                            <button type="submit" name="command" value="set-query-answer" class="btn btn-outline-danger">
+                                <i class="fa fa-window-close" aria-hidden="true"></i>
+                                <fmt:message key="local.decline"/>
                             </button>
                         </td>
                         </form>

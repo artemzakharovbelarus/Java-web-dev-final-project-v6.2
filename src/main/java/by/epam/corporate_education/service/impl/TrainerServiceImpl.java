@@ -16,6 +16,17 @@ public class TrainerServiceImpl implements TrainerService {
     private DAOFactory daoFactory = DAOFactory.getINSTANCE();
 
     @Override
+    public void setQueryAnswer(int idQuery, int answer) throws ServiceException {
+        QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
+
+        try{
+            queryDAO.changeAcceptedStatus(idQuery, answer);
+        } catch (DAOException e){
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public List<Query> getTrainingQueries(int idTraining) throws ServiceException {
         QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
 

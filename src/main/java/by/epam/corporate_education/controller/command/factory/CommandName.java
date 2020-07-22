@@ -29,8 +29,9 @@ public final class CommandName {
     public final static String COMMAND_UNDO_QUERY = "undo-query";
     public final static String COMMAND_SET_LIKE = "like";
     public final static String COMMAND_SET_DISLIKE = "dislike";
-    public final static String COMMAND_VIEW_ALL_QUERIES_TRAINER = "view-all-trainer-trainings";
+    public final static String COMMAND_VIEW_ALL_TRAINER_TRAININGS = "view-all-trainer-trainings";
     public final static String COMMAND_PUT_OFF_LIKE = "put-off-like";
     public final static String COMMAND_PUT_OFF_DISLIKE = "put-off-dislike";
     public final static String COMMAND_VIEW_TRAINING_QUERIES = "view-training-queries";
+    public final static String COMMAND_SET_QUERY_ANSWER = "set-query-answer";
 }

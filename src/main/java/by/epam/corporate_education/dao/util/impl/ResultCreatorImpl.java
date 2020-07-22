@@ -22,8 +22,9 @@ public class ResultCreatorImpl implements ResultCreator {
         int acceptedStatus = resultSet.getInt(TableName.QUERIES + ColumnName.QUERY_ACCEPTED_STATUS);
         LocalDate startDate =
                 resultSet.getDate(TableName.TRAININGS + ColumnName.TRAINING_START_DATE).toLocalDate();
+        int idTraining = resultSet.getInt(TableName.QUERIES + ColumnName.TRAINING_ID_TRAINING);
 
-        Query query = new Query(idQuery, username, title, acceptedStatus, startDate);
+        Query query = new Query(idQuery, username, title, acceptedStatus, startDate, idTraining);
         return query;
     }
 
@@ -64,8 +65,9 @@ public class ResultCreatorImpl implements ResultCreator {
         int idUser = resultSet.getInt(TableName.QUERIES + ColumnName.TRAINING_ID_USER);
         String trainingTitle = resultSet.getString(TableName.TRAININGS +  ColumnName.TRAINING_TITLE);
         LocalDate startDate = resultSet.getDate(TableName.TRAININGS + ColumnName.TRAINING_START_DATE).toLocalDate();
+        int acceptedStatus = resultSet.getInt(TableName.QUERIES + ColumnName.QUERY_ACCEPTED_STATUS);
 
-        Query query = new Query(idQuery, idTraining, idUser, canceledStatus, trainingTitle, startDate);
+        Query query = new Query(idQuery, idTraining, idUser, canceledStatus, trainingTitle, startDate, acceptedStatus);
         return query;
     }
 

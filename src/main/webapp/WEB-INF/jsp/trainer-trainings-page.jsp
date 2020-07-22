@@ -56,14 +56,14 @@
                 <c:if test="${training.deletedStatus == false}">
                     <tr>
                         <th style="text-align: center; vertical-align: middle" scope="row">${training.idTraining}</th>
+                        <form action="controller" method="get">
+                            <input type="hidden" name="idTraining" value="${training.idTraining}">
                         <td style="text-align: center; vertical-align: middle" scope="row">
-                            <form action="controller" method="get">
-                                <input type="hidden" name="idTraining" value="${training.idTraining}">
                                 <button type="submit" name="command" value="view-training" class="btn btn-link">
                                         ${training.title}
                                 </button>
-                            </form>
                         </td>
+                        </form>
                         <td style="text-align: center; vertical-align: middle" scope="row">${training.city}</td>
                         <td style="text-align: center; vertical-align: middle" scope="row">${training.hoursAmount}</td>
                     </tr>

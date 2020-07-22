@@ -11,4 +11,5 @@ public interface QueryDAO {
     public void changeCanceledStatus(int idQuery) throws DAOException;
     public Query getQueryByIdTrainingIdUser(int idTraining, int idUser) throws DAOException;
     public List<Query> getTrainingQueries(int idTraining) throws DAOException;
+    public void changeAcceptedStatus(int idQuery, int answer) throws DAOException;
 }

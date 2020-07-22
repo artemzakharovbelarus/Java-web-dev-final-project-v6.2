@@ -46,7 +46,8 @@
             <th style="text-align: center; vertical-align: middle" scope="col"><fmt:message key="local.id"/></th>
             <th style="text-align: center; vertical-align: middle" scope="col"><fmt:message key="local.Title"/>:</th>
             <th style="text-align: center; vertical-align: middle" scope="col"><fmt:message key="local.start"/></th>
-            <th style="text-align: center; vertical-align: middle"scope="col"></th>
+            <th style="text-align: center; vertical-align: middle" scope="col"><fmt:message key="local.status"/></th>
+            <th style="text-align: center; vertical-align: middle" scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -54,16 +55,36 @@
             <tr>
                 <c:if test="${query.canceledStatus == false}">
                     <th style="text-align: center; vertical-align: middle" scope="row">${query.idQuery}</th>
-                    <td style="text-align: center; vertical-align: middle">${query.trainingTitle}</td>
-                    <td style="text-align: center; vertical-align: middle">${query.startDate}</td>
-                    <td style="text-align: center; vertical-align: middle">
+                    <td style="text-align: center; vertical-align: middle" scope="row">${query.trainingTitle}</td>
+                    <td style="text-align: center; vertical-align: middle" scope="row">${query.startDate}</td>
+                    <td style="text-align: center; vertical-align: middle" scope="row">
+                        <c:choose>
+                            <c:when test="${query.acceptedStatus == 0}">
+                                <fmt:message key="local.under-review"/>
+                            </c:when>
+                            <c:when test="${query.acceptedStatus == 2}">
+                                <h7 class="text-success">
+                                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                                    <fmt:message key="local.accepted"/>
+                                </h7>
+                            </c:when>
+                            <c:when test="${query.acceptedStatus == 1}">
+                                <h7 class="text-danger">
+                                    <fmt:message key="local.declined"/>
+                                </h7>
+                            </c:when>
+                        </c:choose>
+                    </td>
+                    <c:if test="${query.acceptedStatus == 2 || query.acceptedStatus == 0}">
                         <form action="controller" method="post">
                             <input type="hidden" name="idQuery" value="${query.idQuery}">
-                            <button type="submit" name="command" value="undo-query" class="btn btn-danger">
-                                <i class="fa fa-times"></i> <fmt:message key="local.undo"/>
-                            </button>
+                            <td style="text-align: center; vertical-align: middle" scope="row">
+                                <button type="submit" name="command" value="undo-query" class="btn btn-outline-danger">
+                                    <i class="fa fa-times"></i> <fmt:message key="local.undo"/>
+                                </button>
+                            </td>
                         </form>
-                    </td>
+                    </c:if>
                 </c:if>
             </tr>
         </c:forEach>

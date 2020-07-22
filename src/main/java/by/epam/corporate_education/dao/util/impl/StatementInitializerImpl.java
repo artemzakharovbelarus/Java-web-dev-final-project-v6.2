@@ -12,80 +12,80 @@ import java.time.LocalDate;
 public class StatementInitializerImpl implements StatementInitializer {
 
     @Override
-    public void initDislikeEnabled(PreparedStatement statement, int idTraining, int idUser) throws SQLException {
-        statement.setInt(1, idTraining);
-        statement.setInt(2, idUser);
+    public void initDislikeEnabled(PreparedStatement statement, int value, int value2) throws SQLException {
+        statement.setInt(1, value);
+        statement.setInt(2, value2);
     }
 
     @Override
-    public void initLikeEnabled(PreparedStatement statement, int idTraining, int idUser) throws SQLException {
-        statement.setInt(1, idTraining);
-        statement.setInt(2, idUser);
+    public void initLikeEnabled(PreparedStatement statement, int value, int value2) throws SQLException {
+        statement.setInt(1, value);
+        statement.setInt(2, value2);
     }
 
     @Override
-    public void initTrainingTrainerId(PreparedStatement statement, int idTrainer) throws SQLException {
-        statement.setInt(1, idTrainer);
+    public void initTrainingTrainerId(PreparedStatement statement, int value) throws SQLException {
+        statement.setInt(1, value);
     }
 
     @Override
-    public void initDislikes(PreparedStatement statement, int idTraining) throws SQLException {
-        statement.setInt(1, idTraining);
+    public void initDislikes(PreparedStatement statement, int value) throws SQLException {
+        statement.setInt(1, value);
     }
 
     @Override
-    public void initDislike(PreparedStatement statement, int idTraining, int idUser) throws SQLException {
-        statement.setInt(1, idUser);
-        statement.setInt(2, idTraining);
+    public void initDislike(PreparedStatement statement, int value, int value2) throws SQLException {
+        statement.setInt(1, value2);
+        statement.setInt(2, value);
     }
 
     @Override
-    public void initLike(PreparedStatement statement, int idTraining, int idUser) throws SQLException {
-        statement.setInt(1, idUser);
-        statement.setInt(2, idTraining);
+    public void initLike(PreparedStatement statement, int value, int value2) throws SQLException {
+        statement.setInt(1, value2);
+        statement.setInt(2, value);
     }
 
     @Override
-    public void initLikes(PreparedStatement statement, int idTraining) throws SQLException {
-        statement.setInt(1, idTraining);
+    public void initLikes(PreparedStatement statement, int value) throws SQLException {
+        statement.setInt(1, value);
     }
 
     @Override
-    public void initQueries(PreparedStatement statement, int idTraining) throws SQLException {
-        statement.setInt(1, idTraining);
+    public void initQueries(PreparedStatement statement, int value) throws SQLException {
+        statement.setInt(1, value);
     }
 
     @Override
-    public void initQuery(PreparedStatement statement, int idUser) throws SQLException {
-        statement.setInt(1, idUser);
+    public void initQuery(PreparedStatement statement, int value) throws SQLException {
+        statement.setInt(1, value);
     }
 
     @Override
-    public void initQuery(PreparedStatement statement, int idTraining, int idUser)
+    public void initQuery(PreparedStatement statement, int value, int value2)
             throws SQLException {
-        statement.setInt(1, idTraining);
-        statement.setInt(2, idUser);
+        statement.setInt(1, value);
+        statement.setInt(2, value2);
     }
 
     @Override
-    public void initUser(PreparedStatement statement, boolean status, int idUser) throws SQLException {
+    public void initUser(PreparedStatement statement, boolean status, int value) throws SQLException {
         statement.setBoolean(1, status);
-        statement.setInt(2, idUser);
+        statement.setInt(2, value);
     }
 
     @Override
-    public void initUserInfo(PreparedStatement statement, int idUser) throws SQLException {
-        statement.setInt(1, idUser);
+    public void initUserInfo(PreparedStatement statement, int value) throws SQLException {
+        statement.setInt(1, value);
     }
 
     @Override
-    public void initUser(PreparedStatement statement, int idUser) throws SQLException {
-        statement.setInt(1, idUser);
+    public void initUser(PreparedStatement statement, int value) throws SQLException {
+        statement.setInt(1, value);
     }
 
     @Override
-    public void initUser(PreparedStatement statement, String username) throws SQLException {
-        statement.setString(1, username);
+    public void initUser(PreparedStatement statement, String value) throws SQLException {
+        statement.setString(1, value);
     }
 
     @Override
@@ -97,21 +97,21 @@ public class StatementInitializerImpl implements StatementInitializer {
     }
 
     @Override
-    public void initUser(PreparedStatement statement, User user, int idUser) throws SQLException {
+    public void initUser(PreparedStatement statement, User user, int value) throws SQLException {
         statement.setBoolean(1, !user.isBannedStatus());
-        statement.setInt(2, idUser);
+        statement.setInt(2, value);
     }
 
     @Override
-    public void initUser(PreparedStatement statement, int idUser, int idStatus) throws SQLException{
-        statement.setInt(1, idStatus);
-        statement.setInt(2, idUser);
+    public void initUser(PreparedStatement statement, int value, int value2) throws SQLException{
+        statement.setInt(1, value2);
+        statement.setInt(2, value);
     }
 
     @Override
-    public void initUser(PreparedStatement statement, int idUser, User user) throws SQLException {
+    public void initUser(PreparedStatement statement, int value, User user) throws SQLException {
         statement.setBoolean(1, !user.isLeaderStatus());
-        statement.setInt(2, idUser);
+        statement.setInt(2, value);
     }
 
     @Override
@@ -121,14 +121,14 @@ public class StatementInitializerImpl implements StatementInitializer {
     }
 
     @Override
-    public void initTrainingId(PreparedStatement statement, int idTraining) throws SQLException {
-        statement.setInt(1, idTraining);
+    public void initTrainingId(PreparedStatement statement, int value) throws SQLException {
+        statement.setInt(1, value);
     }
 
     @Override
-    public void initTrainingDeleted(PreparedStatement statement, boolean deletedValue, int idTraining) throws SQLException {
+    public void initTrainingDeleted(PreparedStatement statement, boolean deletedValue, int value) throws SQLException {
         statement.setBoolean(1, deletedValue);
-        statement.setInt(2, idTraining);
+        statement.setInt(2, value);
     }
 
     @Override

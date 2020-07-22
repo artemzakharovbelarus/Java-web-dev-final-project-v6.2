@@ -23,11 +23,11 @@ public class PathCreatorImpl implements PathCreator {
     private final static String TRAINER_TRAININGS_PAGE = "trainer-trainings-page";
     private final static String TRAINING_PAGE = "training-page";
     private final static String USER_PAGE = "user-page";
-    private final static String TRAINING_QUERY = "query-page";
+    private final static String TRAINING_QUERIES = "&command=view-training-queries";
 
     @Override
-    public String getTrainingQuery() {
-        return TRAINING_QUERY;
+    public String getTrainingQueries(String contextPath, int idTraining) {
+        return contextPath + ID_TRAINING + idTraining + TRAINING_QUERIES;
     }
 
     @Override

@@ -58,14 +58,14 @@
                 <c:forEach items="${users}" var="user">
                     <tr>
                         <th style="text-align: center; vertical-align: middle" scope="row">${user.idUser}</th>
+                        <form action="controller" method="get">
+                            <input type="hidden" name="idUser" value="${user.idUser}">
                         <td style="text-align: center; vertical-align: middle">
-                            <form action="controller" method="get">
-                                <input type="hidden" name="idUser" value="${user.idUser}">
                                 <button type="submit" name="command" value="view-user" class="btn btn-link">
                                     ${user.username}
                                 </button>
-                            </form>
                         </td>
+                        </form>
                         <td style="text-align: center; vertical-align: middle">${user.email}</td>
                         <td style="text-align: center; vertical-align: middle">
                             <c:choose>
@@ -114,26 +114,26 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
+                        <form action="controller" method="post">
+                            <input type="hidden" name="idUser" value="${user.idUser}">
+                            <input type="hidden" name="bann" value="${user.bannedStatus}"/>
                         <td style="text-align: left; vertical-align: middle">
-                            <form action="controller" method="post">
-                                <input type="hidden" name="idUser" value="${user.idUser}">
-                                <input type="hidden" name="bann" value="${user.bannedStatus}"/>
                             <c:if test="${sessionScope.idUser != user.idUser}">
                                 <c:choose>
                                     <c:when test="${user.bannedStatus == true}">
-                                        <button type="submit" name="command" value="change-banned-status" class="btn btn-success">
+                                        <button type="submit" name="command" value="change-banned-status" class="btn btn-outline-success">
                                             <i class="fa fa-unlock" aria-hidden="true"></i> <fmt:message key="local.unblock"/>
                                         </button>
                                     </c:when>
                                     <c:otherwise>
-                                        <button type="submit" name="command" value="change-banned-status" class="btn btn-danger">
+                                        <button type="submit" name="command" value="change-banned-status" class="btn btn-outline-danger">
                                             <i class="fa fa-lock" aria-hidden="true"></i> <fmt:message key="local.block"/>
                                         </button>
                                     </c:otherwise>
                                 </c:choose>
                             </c:if>
-                            </form>
                         </td>
+                        </form>
                     </tr>
                 </c:forEach>
             </tbody>

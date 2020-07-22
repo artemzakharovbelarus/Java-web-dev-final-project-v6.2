@@ -20,5 +20,5 @@ public interface PathCreator {
     public String getTrainerTrainings();
     public String getTrainingPage();
     public String getUserPage();
-    public String getTrainingQuery();
+    public String getTrainingQueries(String contextPath, int idTraining);
 }

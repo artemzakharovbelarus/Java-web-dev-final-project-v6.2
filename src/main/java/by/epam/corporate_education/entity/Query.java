@@ -20,13 +20,15 @@ public class Query {
     private String trainingTitle;
     private LocalDate startDate;
 
-    public Query(int idQuery, int idTraining, int idUser, boolean canceledStatus, String trainingTitle, LocalDate startDate){
+    public Query(int idQuery, int idTraining, int idUser, boolean canceledStatus,
+                 String trainingTitle, LocalDate startDate, int acceptedStatus){
         setIdQuery(idQuery);
         setIdTraining(idTraining);
         setIdUser(idUser);
         setCanceledStatus(canceledStatus);
         setTrainingTitle(trainingTitle);
         setStartDate(startDate);
+        setAcceptedStatus(acceptedStatus);
     }
 
     public Query(int idTraining, int idUser){
@@ -40,11 +42,12 @@ public class Query {
         setIdUser(idUser);
         setCanceledStatus(canceledStatus);
     }
-    public Query(int idQuery, String username, String trainingTitle, int acceptedStatus, LocalDate startDate){
+    public Query(int idQuery, String username, String trainingTitle, int acceptedStatus, LocalDate startDate, int idTraining){
         setIdQuery(idQuery);
         setUsername(username);
         setTrainingTitle(trainingTitle);
         setAcceptedStatus(acceptedStatus);
         setStartDate(startDate);
+        setIdTraining(idTraining);
     }
 }

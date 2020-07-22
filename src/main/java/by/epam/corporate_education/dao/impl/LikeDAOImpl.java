@@ -29,7 +29,7 @@ public class LikeDAOImpl implements LikeDAO {
         try (Connection connection = connectionPool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(request)){
 
-            statementInitializer.initDislikeEnabled(statement, like.getIdTraining(), like.getIdUser());
+            statementInitializer.initLikeEnabled(statement, like.getIdTraining(), like.getIdUser());
             statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);

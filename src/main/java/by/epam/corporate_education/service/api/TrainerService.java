@@ -9,4 +9,5 @@ import java.util.List;
 public interface TrainerService {
     public List<Training> getAllTrainerTrainings(int idTrainer) throws ServiceException;
     public List<Query> getTrainingQueries(int idTraining) throws ServiceException;
+    public void setQueryAnswer(int idQuery, int answer) throws ServiceException;
 }

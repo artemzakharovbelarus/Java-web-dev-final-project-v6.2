@@ -27,6 +27,20 @@ public class QueryDAOImpl implements QueryDAO {
     private ResourceCloser resourceCloser = utilFactory.getResourceCloser();
 
     @Override
+    public void changeAcceptedStatus(int idQuery, int answer) throws DAOException {
+        String request = SQLRequest.CHANGE_ACCEPTED_STATUS;
+
+        try (Connection connection = connectionPool.takeConnection();
+             PreparedStatement statement = connection.prepareStatement(request)){
+
+            statementInitializer.initQuery(statement, answer, idQuery);
+            statement.executeUpdate();
+        } catch (SQLException e){
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
     public List<Query> getTrainingQueries(int idTraining) throws DAOException {
         String request = SQLRequest.GET_TRAINING_QUERIES;
 
