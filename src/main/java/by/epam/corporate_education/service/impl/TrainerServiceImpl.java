@@ -16,10 +16,16 @@ import java.util.List;
 public class TrainerServiceImpl implements TrainerService {
     private DAOFactory daoFactory = DAOFactory.getINSTANCE();
 
-    @Setter
     private QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
-    @Setter
     private TrainingDAO trainingDAO = daoFactory.getTrainingDAOImpl();
+
+    public TrainerServiceImpl(){}
+
+    //annotation
+    public TrainerServiceImpl(QueryDAO queryDAO, TrainingDAO trainingDAO){
+        this.queryDAO = queryDAO;
+        this.trainingDAO = trainingDAO;
+    }
 
     @Override
     public void setQueryAnswer(int idQuery, int answer) throws ServiceException {
@@ -52,6 +58,4 @@ public class TrainerServiceImpl implements TrainerService {
         }
         return trainings;
     }
-
-
 }

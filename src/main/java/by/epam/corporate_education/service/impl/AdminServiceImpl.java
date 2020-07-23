@@ -6,6 +6,7 @@ import by.epam.corporate_education.dao.api.LikeDAO;
 import by.epam.corporate_education.dao.api.TrainingDAO;
 import by.epam.corporate_education.dao.api.UserDAO;
 import by.epam.corporate_education.dao.exception.DAOException;
+import by.epam.corporate_education.entity.Like;
 import by.epam.corporate_education.entity.Training;
 import by.epam.corporate_education.entity.User;
 import by.epam.corporate_education.service.api.AdminService;
@@ -16,11 +17,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminServiceImpl implements AdminService {
+
     private DAOFactory daoFactory = DAOFactory.getINSTANCE();
+
+    private LikeDAO likeDAO = daoFactory.getLikeDAOImpl();
+    private DislikeDAO dislikeDAO = daoFactory.getDislikeDAOImpl();
+    private UserDAO userDAO = daoFactory.getUserDAOImpl();
+    private TrainingDAO trainingDAO = daoFactory.getTrainingDAOImpl();
+
+    public AdminServiceImpl(){}
+
+    //annotation
+    public AdminServiceImpl(LikeDAO likeDAO, DislikeDAO dislikeDAO, UserDAO userDAO, TrainingDAO trainingDAO){
+        this.likeDAO = likeDAO;
+        this.dislikeDAO = dislikeDAO;
+        this.userDAO = userDAO;
+        this.trainingDAO = trainingDAO;
+    }
 
     @Override
     public int getLikesAmount(int idTraining) throws ServiceException {
-        LikeDAO likeDAO = daoFactory.getLikeDAOImpl();
 
         int likesAmount = 0;
         try {
@@ -33,7 +49,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int getDislikesAmount(int idTraining) throws ServiceException {
-        DislikeDAO dislikeDAO = daoFactory.getDislikeDAOImpl();
 
         int dislikesAmount = 0;
         try {
@@ -46,7 +61,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void changeBannedStatus(int idUser, boolean status) throws ServiceException {
-        UserDAO userDAO = daoFactory.getUserDAOImpl();
         try{
             userDAO.changeBannedStatus(idUser, !status);
         } catch (DAOException e){
@@ -58,7 +72,6 @@ public class AdminServiceImpl implements AdminService {
     public void updateTrainingValues(int idTraining, String title, String requirements, String information, String city,
                                     int hoursAmount, int minMembers, int maxMembers, LocalDate startDate, LocalDate endDate,
                                     String trainingPhoto, int idTrainer) throws ServiceException{
-        TrainingDAO trainingDAO = daoFactory.getTrainingDAOImpl();
 
         /*
          * validation
@@ -75,7 +88,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int changeTrainingDeletedStatus(int idTraining) throws ServiceException {
-        TrainingDAO trainingDAO = daoFactory.getTrainingDAOImpl();
         int result = 0;
         try{
             result = trainingDAO.changeDeletedStatus(idTraining);
@@ -88,7 +100,6 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<User> getAllUsers() throws ServiceException {
         List<User> users = new ArrayList<>();
-        UserDAO userDAO = daoFactory.getUserDAOImpl();
 
         try{
             users = userDAO.getAllUsers();
@@ -101,8 +112,6 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public User getUserInformation(int idUser) throws ServiceException {
         User user = new User();
-        UserDAO userDAO = daoFactory.getUserDAOImpl();
-
         try {
             user = userDAO.getAllUserInformation(idUser);
         } catch (DAOException e) {

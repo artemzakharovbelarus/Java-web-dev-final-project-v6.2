@@ -6,6 +6,7 @@ import by.epam.corporate_education.dao.exception.DAOException;
 import by.epam.corporate_education.dao.impl.QueryDAOImpl;
 import by.epam.corporate_education.dao.impl.TrainingDAOImpl;
 import by.epam.corporate_education.entity.Query;
+import by.epam.corporate_education.entity.Training;
 import by.epam.corporate_education.service.exception.ServiceException;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +18,13 @@ import static org.junit.Assert.*;
 
 public class TrainerServiceTest {
 
-    TrainerServiceImpl trainerService = new TrainerServiceImpl();
+    TrainerServiceImpl trainerService;
     QueryDAO queryDAO = Mockito.mock(QueryDAOImpl.class);
     TrainingDAO trainingDAO = Mockito.mock(TrainingDAOImpl.class);
 
     @Before
     public void init(){
-        trainerService.setQueryDAO(queryDAO);
-        trainerService.setTrainingDAO(trainingDAO);
+        trainerService = new TrainerServiceImpl(queryDAO, trainingDAO);
     }
 
     @Test(expected = ServiceException.class)
@@ -69,4 +69,27 @@ public class TrainerServiceTest {
         //then
         assertEquals(result, queries);
     }
+
+    @Test(expected = ServiceException.class)
+    public void getAllTrainerTrainings_DAOExceptionFromGetAllTrainingsByIdTrainer_ServiceException()
+            throws DAOException, ServiceException {
+        //given
+        //when
+        Mockito.doThrow(DAOException.class).when(trainingDAO).getAllTrainingsByIdTrainer(Mockito.anyInt());
+        trainerService.getAllTrainerTrainings(Mockito.anyInt());
+        //then
+        //excepted ServiceException
+    }
+
+    @Test
+    public void getAllTrainerTraining_validParameterIdTrainer_correct() throws DAOException, ServiceException {
+        //given
+        List<Training> trainings = (List<Training>) Mockito.mock(List.class);
+        Mockito.doReturn(trainings).when(trainingDAO).getAllTrainingsByIdTrainer(Mockito.anyInt());
+        List<Training> result = trainerService.getAllTrainerTrainings(Mockito.anyInt());
+        //then
+        assertEquals(result, trainings);
+    }
+
+
 }

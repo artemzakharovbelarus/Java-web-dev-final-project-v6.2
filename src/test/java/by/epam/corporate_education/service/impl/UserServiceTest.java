@@ -13,7 +13,6 @@ import by.epam.corporate_education.service.util.api.UserValidator;
 import by.epam.corporate_education.service.util.impl.UserValidatorImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class UserServiceTest {
     ValidatorManager validatorManager = ValidatorManager.getINSTANCE();
     ServiceUtilFactory serviceUtilFactory = ServiceUtilFactory.getINSTANCE();
 
-    UserServiceImpl userService = new UserServiceImpl();
+    UserServiceImpl userService;
 
     LikeDAO likeDAO = Mockito.mock(LikeDAOImpl.class);
     DislikeDAO dislikeDAO = Mockito.mock(DislikeDAO.class);
@@ -39,13 +38,8 @@ public class UserServiceTest {
     public void init(){
         validatorManager.setUserValidator(userValidator);
         serviceUtilFactory.setValidatorManager(validatorManager);
-        userService.setUtilFactory(serviceUtilFactory);
-        userService.setLikeDAO(likeDAO);
-        userService.setDislikeDAO(dislikeDAO);
-        userService.setQueryDAO(queryDAO);
-        userService.setUserDAO(userDAO);
-        userService.setNewsDAO(newsDAO);
-        userService.setTrainingDAO(trainingDAO);
+        userService = new UserServiceImpl(serviceUtilFactory, likeDAO, dislikeDAO,
+                                          queryDAO, userDAO, newsDAO, trainingDAO);
     }
 
     @Test(expected = ServiceException.class)

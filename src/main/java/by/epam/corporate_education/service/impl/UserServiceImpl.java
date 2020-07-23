@@ -19,23 +19,30 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private DAOFactory daoFactory = DAOFactory.getINSTANCE();
-    @Setter
     private ServiceUtilFactory utilFactory = ServiceUtilFactory.getINSTANCE();
     private ValidatorManager validatorManager = utilFactory.getValidatorManager();
     private PasswordEncoder passwordEncoder = utilFactory.getEncoder();
 
-    @Setter
     private LikeDAO likeDAO = daoFactory.getLikeDAOImpl();
-    @Setter
     private DislikeDAO dislikeDAO = daoFactory.getDislikeDAOImpl();
-    @Setter
     private QueryDAO queryDAO = daoFactory.getQueryDAOImpl();
-    @Setter
     private UserDAO userDAO = daoFactory.getUserDAOImpl();
-    @Setter
     private NewsDAO newsDAO = daoFactory.getNewsDAOImpl();
-    @Setter
     private TrainingDAO trainingDAO = daoFactory.getTrainingDAOImpl();
+
+    public UserServiceImpl(){}
+
+    //annotation
+    public UserServiceImpl(ServiceUtilFactory utilFactory, LikeDAO likeDAO, DislikeDAO dislikeDAO, QueryDAO queryDAO,
+                           UserDAO userDAO, NewsDAO newsDAO, TrainingDAO trainingDAO){
+        this.utilFactory = utilFactory;
+        this.likeDAO = likeDAO;
+        this.dislikeDAO = dislikeDAO;
+        this.queryDAO = queryDAO;
+        this.userDAO = userDAO;
+        this.newsDAO = newsDAO;
+        this.trainingDAO = trainingDAO;
+    }
 
     @Override
     public void putOffLike(int idTraining, int idUser) throws ServiceException {
