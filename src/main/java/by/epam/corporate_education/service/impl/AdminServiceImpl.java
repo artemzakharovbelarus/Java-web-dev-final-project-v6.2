@@ -98,7 +98,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<User> getAllUsers() throws ServiceException {
+    public List<User> viewAllUsers() throws ServiceException {
         List<User> users = new ArrayList<>();
 
         try{

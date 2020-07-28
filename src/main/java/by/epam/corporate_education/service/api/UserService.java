@@ -13,7 +13,7 @@ import java.util.List;
 public interface UserService {
     public User signIn(String username, String password) throws ServiceException;
     public void signOut(int idUser, boolean status) throws ServiceException;
-    public int signUp(String username, String email, String password, String confirmedPassword) throws ServiceException;
+    public void signUp(String username, String email, String password, String confirmedPassword) throws ServiceException;
     public List<Training> viewAllTrainings() throws ServiceException;
     public List<NewsItem> viewAllNews() throws ServiceException;
     public Training getTraining(int idTraining) throws ServiceException;

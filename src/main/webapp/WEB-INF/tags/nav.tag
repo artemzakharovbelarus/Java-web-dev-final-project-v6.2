@@ -53,7 +53,6 @@
                         </c:when>
                         <c:when test="${sessionScope.status == 2}">
                             <form action="controller" method="get">
-                                <input type="hidden" name="idUser" value="${sessionScope.idUser}"/>
                                 <button type="submit" name="command" value="view-all-queries" class="dropdown-item">
                                     <i class="fa fa-share-square-o" aria-hidden="true"></i>
                                     <fmt:message key="local.queries"/>
@@ -128,7 +127,6 @@
                     <div class="dropdown-divider"></div>
                     <form action="controller" method="get">
                         <input type="hidden" name="online-status" value="${online}"/>
-                        <input type="hidden" name="idUser" value="${idUser}"/>
                         <button type="submit" name="command" value="sign-out" class="dropdown-item">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             <fmt:message key="local.sign-out"/>

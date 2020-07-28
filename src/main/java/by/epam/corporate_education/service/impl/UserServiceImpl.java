@@ -211,18 +211,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int signUp(String username, String email, String password, String confirmedPassword) throws ServiceException {
+    public void signUp(String username, String email, String password, String confirmedPassword) throws ServiceException {
 
         UserValidator userValidator = validatorManager.getUserValidator();
         userValidator.validateSignUp(username, email, password, confirmedPassword);
         User user = new User(username, email);
 
         String encoded = passwordEncoder.encode(password);
-
-        int result = 0;
         try {
 
-            result = userDAO.addNewUser(user, encoded);
+            userDAO.addNewUser(user, encoded);
         } catch (UsedUsernameException e) {
             throw new InvalidUsernameException(e);
         } catch (UsedEmailException e){
@@ -230,7 +228,6 @@ public class UserServiceImpl implements UserService {
         } catch (DAOException e){
             throw new ServiceException(e);
         }
-        return result;
     }
 
     @Override

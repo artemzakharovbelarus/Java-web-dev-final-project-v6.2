@@ -2,10 +2,9 @@ package by.epam.corporate_education.controller.command.impl;
 
 import by.epam.corporate_education.controller.command.Command;
 import by.epam.corporate_education.controller.command.CommandException;
-import by.epam.corporate_education.controller.command.util.CommandUtilFactory;
-import by.epam.corporate_education.controller.command.util.api.AttributesInitializer;
-import by.epam.corporate_education.controller.command.util.api.PaginationCurrentPage;
-import by.epam.corporate_education.entity.Query;
+import by.epam.corporate_education.controller.util.ControllerUtilFactory;
+import by.epam.corporate_education.controller.util.ParameterName;
+import by.epam.corporate_education.controller.util.api.*;
 import by.epam.corporate_education.entity.Training;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.UserService;
@@ -19,22 +18,46 @@ import java.util.List;
 
 public class ViewAllTrainingsCommand implements Command {
 
+    private ControllerUtilFactory utilFactory = ControllerUtilFactory.getINSTANCE();
+    private ServiceFactory serviceFactory = ServiceFactory.getINSTANCE();
+    private UserService userService;
+
+    public ViewAllTrainingsCommand(){
+        userService = serviceFactory.getUserServiceImpl();
+    }
+
+    //annotation
+    public ViewAllTrainingsCommand(UserService userService, ControllerUtilFactory utilFactory){
+        this.userService = userService;
+        this.utilFactory = utilFactory;
+    }
+
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        String path = "error";
+    public String execute() throws CommandException {
         List<Training> trainings = new ArrayList<>();
 
-        CommandUtilFactory utilFactory = CommandUtilFactory.getINSTANCE();
         AttributesInitializer attributesInitializer = utilFactory.getAttributesInitializer();
         PaginationCurrentPage paginationCurrentPage = utilFactory.getPaginationCurrentPage();
-        ServiceFactory serviceFactory = ServiceFactory.getINSTANCE();
-        UserService userService = serviceFactory.getUserServiceImpl();
+        HttpRequestResponseKeeper keeper = utilFactory.getHttpRequestResponseKeeper();
+        PathCreator pathCreator = utilFactory.getPathCreator();
+        ControllerValueChecker valueChecker = utilFactory.getControllerValueChecker();
+
+        HttpServletRequest request = keeper.getRequest();
+        HttpServletResponse response = keeper.getResponse();
+
+        HttpSession session = request.getSession();
+        int idStatus = (Integer) session.getAttribute(ParameterName.STATUS);
+
+        String path = pathCreator.getError();
 
         try{
-            trainings = userService.viewAllTrainings();
-            attributesInitializer.setRequestAttributesTrainings(request, trainings);
-
-            path = "trainings-page";
+            if (valueChecker.isAnyUser(idStatus)) {
+                trainings = userService.viewAllTrainings();
+                attributesInitializer.setRequestAttributesTrainings(request, trainings);
+                path = pathCreator.getTrainingsPage();
+            } else {
+                path = pathCreator.getError();
+            }
         } catch (ServiceException e) {
             throw new CommandException(e);
         }

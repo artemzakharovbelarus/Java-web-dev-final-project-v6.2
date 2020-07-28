@@ -61,4 +61,14 @@ public class ColumnName {
      * column title for 'likes' and 'dislikes' tables
      */
     public static final String ENABLED_STATUS = "enabled_status";
+
+    /**
+     * column titles for table 'news'
+     */
+    public static final String NEWS_ID_NEWS = "idNews";
+    public static final String NEWS_INTRO_NEWS = "news_intro";
+    public static final String NEWS_TEXT_NEWS = "news_text";
+    public static final String NEWS_IMAGE_NEWS = "news_image";
+    public static final String NEWS_ID_USER = "idUser";
+
 }

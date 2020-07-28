@@ -1,0 +1,60 @@
+package by.epam.corporate_education.controller.util;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ParameterName {
+    public final static String COMMAND = "command";
+    public final static String ID_USER = "idUser";
+    public final static String BANN = "bann";
+    public final static String LOCALE = "locale";
+    public final static String ID_TRAINING = "idTraining";
+    public final static String TITLE = "title";
+    public final static String REQUIREMENTS = "requirements";
+    public final static String INFORMATION = "information";
+    public final static String CITY = "city";
+    public final static String HOURS_AMOUNT = "hours-amount";
+    public final static String MIN_MEMBERS = "min-members";
+    public final static String MAX_MEMBERS = "max-members";
+    public final static String START_DATE = "start-date";
+    public final static String END_DATE = "end-date";
+    public final static String ID_TRAINER = "idTrainer";
+    public final static String TRAINING_PHOTO = "training-photo";
+    public final static String ID_QUERY = "idQuery";
+    public final static String ANSWER = "answer";
+    public final static String USERNAME = "username";
+    public final static String PASSWORD = "password";
+    public final static String USER_BANNED_MESSAGE = "user_banned_message";
+    public final static String LOCAL_USER_BANNED = "local.user-banned";
+    public final static String SIGN_IN_MESSAGE = "sign_in_message";
+    public final static String LOCAL_INVALID_SIGN_IN_VALUES = "local.invalid-sign-in-values";
+    public final static String ONLINE = "online";
+    public final static String EMAIL = "email";
+    public final static String CONFIRMED_PASSWORD = "confirmed-password";
+    public final static String SUCCESS_SIGN_UP = "success_sign_up";
+    public final static String MESSAGE_SUCCESS_SIGN_UP = "message.success-sign-up";
+    public final static String INVALID_USERNAME = "invalid_username";
+    public final static String MESSAGE_INVALID_USERNAME = "message.invalid-username";
+    public final static String INVALID_EMAIL = "invalid_email";
+    public final static String MESSAGE_INVALID_EMAIL = "message.invalid-email";
+    public final static String INVALID_PASSWORD = "invalid_password";
+    public final static String MESSAGE_INVALID_PASSWORD = "message.invalid-password";
+    public final static String NO_EQUALS_PASSWORD = "no_equals_passwords";
+    public final static String MESSAGE_NOT_EQUALS_PASSWORDS = "message.not-equals-passwords";
+    public final static String QUERY = "query";
+    public final static String LIKE_ENABLED = "like_enabled";
+    public final static String DISLIKE_ENABLED = "dislike_enabled";
+    public final static String LIKES_AMOUNT = "like_amount";
+    public final static String DISLIKES_AMOUNT = "dislike_amount";
+    public final static String QUERIES = "queries";
+    public final static String ACTIVE_QUERY = "active_query";
+    public final static String TRAINING = "training";
+    public final static String TRAININGS = "trainings";
+    public final static String NEWS = "news";
+    public final static String USERS = "users";
+    public final static String STATUS = "status";
+    public final static String LEADER = "leader";
+    public final static String BANNED = "banned";
+    public final static String USER_PHOTO = "userPhoto";
+}

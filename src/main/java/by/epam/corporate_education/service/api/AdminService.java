@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface AdminService {
-    public List<User> getAllUsers() throws ServiceException;
+    public List<User> viewAllUsers() throws ServiceException;
     public User getUserInformation(int idUser) throws ServiceException;
     public int changeTrainingDeletedStatus(int idTraining) throws ServiceException;
     public void updateTrainingValues(int idTraining, String title, String requirements, String information, String city,

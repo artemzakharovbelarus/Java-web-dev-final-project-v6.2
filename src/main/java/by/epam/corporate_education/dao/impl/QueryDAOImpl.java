@@ -30,13 +30,18 @@ public class QueryDAOImpl implements QueryDAO {
     public void changeAcceptedStatus(int idQuery, int answer) throws DAOException {
         String request = SQLRequest.CHANGE_ACCEPTED_STATUS;
 
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initQuery(statement, answer, idQuery);
             statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 
@@ -45,9 +50,13 @@ public class QueryDAOImpl implements QueryDAO {
         String request = SQLRequest.GET_TRAINING_QUERIES;
 
         List<Query> queries = new ArrayList<>();
+
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initQueries(statement, idTraining);
             resultSet = statement.executeQuery();
@@ -57,6 +66,8 @@ public class QueryDAOImpl implements QueryDAO {
             }
         } catch (SQLException e){
             throw new DAOException();
+        } finally {
+            resourceCloser.close(connection, statement, resultSet);
         }
         return queries;
     }
@@ -65,13 +76,18 @@ public class QueryDAOImpl implements QueryDAO {
     public void changeCanceledStatus(int idQuery) throws DAOException {
         String request = SQLRequest.CHANGE_CANCELED_STATUS;
 
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initQuery(statement, idQuery);
             statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 
@@ -79,10 +95,14 @@ public class QueryDAOImpl implements QueryDAO {
     public List<Query> getAllQueries(int idUser) throws DAOException {
         String request = SQLRequest.GET_ALL_QUERIES_BY_ID_USER;
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
+
         List<Query> queries = new ArrayList<>();
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initQuery(statement, idUser);
             resultSet = statement.executeQuery();
@@ -93,7 +113,7 @@ public class QueryDAOImpl implements QueryDAO {
         } catch (SQLException e){
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         return queries;
     }
@@ -102,13 +122,18 @@ public class QueryDAOImpl implements QueryDAO {
     public void addQuery(Query query) throws DAOException {
         String request = SQLRequest.ADD_QUERY;
 
-        try(Connection connection = connectionPool.takeConnection();
-            PreparedStatement statement = connection.prepareStatement(request)){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initQuery(statement, query.getIdTraining(), query.getIdUser());
             statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 
@@ -116,10 +141,14 @@ public class QueryDAOImpl implements QueryDAO {
     public Query getQueryByIdTrainingIdUser(int idTraining, int idUser) throws DAOException {
         String request = SQLRequest.GET_QUERY_BY_ID_TRAINING_ID_USER;
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
+
         Query query = new Query();
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initQuery(statement, idTraining, idUser);
             resultSet = statement.executeQuery();
@@ -131,7 +160,7 @@ public class QueryDAOImpl implements QueryDAO {
         } catch (SQLException e){
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         return query;
     }

@@ -20,15 +20,20 @@ public class TrainingDAOImpl implements TrainingDAO {
     private StatementInitializer statementInitializer = utilFactory.getStatementInitializer();
     private ResourceCloser resourceCloser = utilFactory.getResourceCloser();
     private ResultCreator resultCreator = utilFactory.getResultCreator();
+    private SortingManager sortingManager = utilFactory.getSortingManager();
 
     @Override
     public List<Training> getAllTrainingsByIdTrainer(int idTrainer) throws DAOException {
         String request = SQLRequest.GET_ALL_TRAININGS_BY_ID_TRAINER;
 
         List<Training> trainings = new ArrayList<>();
+
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initTrainingTrainerId(statement, idTrainer);
             resultSet = statement.executeQuery();
@@ -38,6 +43,8 @@ public class TrainingDAOImpl implements TrainingDAO {
             }
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement, resultSet);
         }
         return trainings;
     }
@@ -46,9 +53,12 @@ public class TrainingDAOImpl implements TrainingDAO {
     public Training getTraining(int idTraining) throws DAOException {
         String request = SQLRequest.GET_TRAINING_BY_ID;
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initTrainingId(statement, idTraining);
             resultSet = statement.executeQuery();
@@ -58,7 +68,7 @@ public class TrainingDAOImpl implements TrainingDAO {
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         throw new DAOException("No training with ID: " + idTraining + " in database");
     }
@@ -68,9 +78,12 @@ public class TrainingDAOImpl implements TrainingDAO {
         String request = SQLRequest.GET_ALL_TRAININGS;
         List<Training> trainings = new ArrayList<>();
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
-        try(Connection connection = connectionPool.takeConnection();
-            PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -80,20 +93,24 @@ public class TrainingDAOImpl implements TrainingDAO {
         } catch (SQLException e){
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         return trainings;
     }
 
     @Override
     public List<Training> getAllTrainingsSorted(String parameter, String typeSorting) throws DAOException {
-        List<Training> trainingsSorted = new ArrayList<>();
-        SortingManager sortingManager = utilFactory.getSortingManager();
+        String request = sortingManager.getSortingRequest(parameter, typeSorting);
 
+        List<Training> trainingsSorted = new ArrayList<>();
+
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
-        try (Connection connection = connectionPool.takeConnection();
-             Statement statement = connection.createStatement()){
-             String request = sortingManager.getSortingRequest(parameter, typeSorting);
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
+
             resultSet = statement.executeQuery(request);
 
             while (resultSet.next()){
@@ -103,7 +120,7 @@ public class TrainingDAOImpl implements TrainingDAO {
         } catch (SQLException e){
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         return trainingsSorted;
     }
@@ -111,12 +128,18 @@ public class TrainingDAOImpl implements TrainingDAO {
     @Override
     public void addTraining(Training training) throws DAOException {
         String request = "";
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 
@@ -124,15 +147,20 @@ public class TrainingDAOImpl implements TrainingDAO {
     public int changeDeletedStatus(int idTraining) throws DAOException {
         String request = SQLRequest.CHANGE_TRAINING_DELETED_STATUS;
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         int result = 0;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             Training training = getTraining(idTraining);
             statementInitializer.initTrainingDeleted(statement, !training.isDeletedStatus(), idTraining);
             result = statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
         return result;
     }
@@ -157,13 +185,18 @@ public class TrainingDAOImpl implements TrainingDAO {
     public void updateTraining(Training training) throws DAOException {
         String request = SQLRequest.UPDATE_TRAINING_VALUES;
 
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initTrainingUpdating(statement, training);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 }

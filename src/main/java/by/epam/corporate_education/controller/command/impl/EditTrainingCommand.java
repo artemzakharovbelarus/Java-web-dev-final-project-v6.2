@@ -2,9 +2,11 @@ package by.epam.corporate_education.controller.command.impl;
 
 import by.epam.corporate_education.controller.command.Command;
 import by.epam.corporate_education.controller.command.CommandException;
-import by.epam.corporate_education.controller.command.util.CommandUtilFactory;
-import by.epam.corporate_education.controller.command.util.api.NumberChecker;
-import by.epam.corporate_education.controller.command.util.api.PathCreator;
+import by.epam.corporate_education.controller.util.ControllerUtilFactory;
+import by.epam.corporate_education.controller.util.ParameterName;
+import by.epam.corporate_education.controller.util.api.ControllerValueChecker;
+import by.epam.corporate_education.controller.util.api.HttpRequestResponseKeeper;
+import by.epam.corporate_education.controller.util.api.PathCreator;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.AdminService;
 import by.epam.corporate_education.service.exception.ServiceException;
@@ -15,33 +17,46 @@ import java.time.LocalDate;
 
 public class EditTrainingCommand implements Command {
 
+    private ControllerUtilFactory utilFactory = ControllerUtilFactory.getINSTANCE();
+    private ServiceFactory serviceFactory = ServiceFactory.getINSTANCE();
+    private AdminService adminService;
+
+    public EditTrainingCommand(){
+        adminService = serviceFactory.getAdminServiceImpl();
+    }
+
+    //annotation
+    public EditTrainingCommand(AdminService adminService, ControllerUtilFactory utilFactory){
+        this.adminService = adminService;
+        this.utilFactory = utilFactory;
+    }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        CommandUtilFactory utilFactory = CommandUtilFactory.getINSTANCE();
-        NumberChecker numberChecker = utilFactory.getNumberChecker();
+    public String execute() throws CommandException {
+        ControllerValueChecker controllerValueChecker = utilFactory.getControllerValueChecker();
         PathCreator pathCreator = utilFactory.getPathCreator();
+        HttpRequestResponseKeeper keeper = utilFactory.getHttpRequestResponseKeeper();
+
+        HttpServletRequest request = keeper.getRequest();
+        HttpServletResponse response = keeper.getResponse();
 
         String path = pathCreator.getError();
-        String idTraining = request.getParameter("idTraining");
+        String idTraining = request.getParameter(ParameterName.ID_TRAINING);
 
-        String title = request.getParameter("title");
-        String requirements = request.getParameter("requirements");
-        String information = request.getParameter("information");
-        String city = request.getParameter("city");
-        int hoursAmount = Integer.parseInt(request.getParameter("hours-amount"));
-        int minMembers = Integer.parseInt(request.getParameter("min-members"));
-        int maxMembers = Integer.parseInt(request.getParameter("max-members"));
-        LocalDate startDate = LocalDate.parse(request.getParameter("start-date"));
-        LocalDate endDate = LocalDate.parse(request.getParameter("end-date"));
-        int idTrainer = Integer.parseInt(request.getParameter("idTrainer"));
-        String trainingPhoto = request.getParameter("training-photo");
-
-        ServiceFactory serviceFactory = ServiceFactory.getINSTANCE();
-        AdminService adminService = serviceFactory.getAdminServiceImpl();
+        String title = request.getParameter(ParameterName.TITLE);
+        String requirements = request.getParameter(ParameterName.REQUIREMENTS);
+        String information = request.getParameter(ParameterName.INFORMATION);
+        String city = request.getParameter(ParameterName.CITY);
+        int hoursAmount = Integer.parseInt(request.getParameter(ParameterName.HOURS_AMOUNT));
+        int minMembers = Integer.parseInt(request.getParameter(ParameterName.MIN_MEMBERS));
+        int maxMembers = Integer.parseInt(request.getParameter(ParameterName.MAX_MEMBERS));
+        LocalDate startDate = LocalDate.parse(request.getParameter(ParameterName.START_DATE));
+        LocalDate endDate = LocalDate.parse(request.getParameter(ParameterName.END_DATE));
+        int idTrainer = Integer.parseInt(request.getParameter(ParameterName.ID_TRAINER));
+        String trainingPhoto = request.getParameter(ParameterName.TRAINING_PHOTO);
 
         try{
-            if (numberChecker.isNumber(idTraining)){
+            if (controllerValueChecker.isNumber(idTraining)){
                 int idTrainingInt = Integer.parseInt(idTraining);
                 adminService.updateTrainingValues(idTrainingInt, title, requirements, information, city, hoursAmount,
                         minMembers, maxMembers, startDate, endDate, trainingPhoto, idTrainer);

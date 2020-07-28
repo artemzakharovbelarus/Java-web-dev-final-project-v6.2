@@ -14,11 +14,9 @@ import by.epam.corporate_education.entity.User;
 import by.epam.corporate_education.service.exception.ServiceException;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -170,7 +168,7 @@ public class AdminServiceTest {
         //given
         //when
         Mockito.doThrow(DAOException.class).when(userDAO).getAllUsers();
-        adminService.getAllUsers();
+        adminService.viewAllUsers();
         //then
         //expected ServiceException
     }
@@ -180,7 +178,7 @@ public class AdminServiceTest {
         //given
         List<User> users = (List<User>) Mockito.mock(List.class);
         Mockito.doReturn(users).when(userDAO).getAllUsers();
-        List<User> result = adminService.getAllUsers();
+        List<User> result = adminService.viewAllUsers();
         //then
         assertEquals(result, users);
     }

@@ -3,16 +3,25 @@ package by.epam.corporate_education.dao.util.impl;
 import by.epam.corporate_education.dao.util.ColumnName;
 import by.epam.corporate_education.dao.util.TableName;
 import by.epam.corporate_education.dao.util.api.ResultCreator;
-import by.epam.corporate_education.entity.Query;
-import by.epam.corporate_education.entity.Training;
-import by.epam.corporate_education.entity.User;
-import by.epam.corporate_education.entity.UserStatus;
+import by.epam.corporate_education.entity.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class ResultCreatorImpl implements ResultCreator {
+
+    @Override
+    public NewsItem getNextNews(ResultSet resultSet) throws SQLException {
+        int idNews = resultSet.getInt(ColumnName.NEWS_ID_NEWS);
+        String newsIntro = resultSet.getString(ColumnName.NEWS_INTRO_NEWS);
+        String newsText = resultSet.getString(ColumnName.NEWS_TEXT_NEWS);
+        String newsImage = resultSet.getString(ColumnName.NEWS_IMAGE_NEWS);
+        int idAdmin = resultSet.getInt(ColumnName.NEWS_ID_USER);
+
+        NewsItem newsItem = new NewsItem(idNews, newsIntro, newsText, newsImage, idAdmin);
+        return newsItem;
+    }
 
     @Override
     public Query getFullQueryToTraining(ResultSet resultSet) throws SQLException {

@@ -26,13 +26,18 @@ public class DislikeDAOImpl implements DislikeDAO {
     public void changeEnabledStatus(Dislike dislike) throws DAOException {
         String request = SQLRequest.CHANGE_DISLIKE_ENABLED_STATUS;
 
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try{
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initDislikeEnabled(statement, dislike.getIdTraining(), dislike.getIdUser());
             statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 
@@ -40,10 +45,13 @@ public class DislikeDAOImpl implements DislikeDAO {
     public boolean getDislikeEnabledStatus(Dislike dislike) throws DAOException {
         String request = SQLRequest.GET_DISLIKE_ENABLED_STATUS;
 
-        ResultSet resultSet = null;
         boolean result = false;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initDislikeEnabled(statement, dislike.getIdTraining(), dislike.getIdUser());
             resultSet = statement.executeQuery();
@@ -52,6 +60,8 @@ public class DislikeDAOImpl implements DislikeDAO {
             }
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement, resultSet);
         }
         return result;
     }
@@ -60,13 +70,18 @@ public class DislikeDAOImpl implements DislikeDAO {
     public void addTrainingDislike(Dislike dislike) throws DAOException {
         String request = SQLRequest.ADD_TRAINING_DISLIKE;
 
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initDislike(statement, dislike.getIdTraining(), dislike.getIdUser());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 
@@ -74,10 +89,13 @@ public class DislikeDAOImpl implements DislikeDAO {
     public int getTrainingDislikesAmount(int idTraining) throws DAOException {
         String request = SQLRequest.GET_TRAINING_DISLIKES;
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
         int result = 0;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initDislikes(statement, idTraining);
             resultSet = statement.executeQuery();
@@ -89,7 +107,7 @@ public class DislikeDAOImpl implements DislikeDAO {
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         return result;
     }

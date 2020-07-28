@@ -195,7 +195,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void signUp_validParameters_correct()
+    public void signUp_validParameters_void_correct()
             throws ServiceException, DAOException {
         //given
         //when
@@ -207,9 +207,8 @@ public class UserServiceTest {
         String email = "temax359x@gmail.com";
         String password = "QWE123QW";
         String confirmedPassword = "QWE123QW";
-        int result = userService.signUp(username, email, password, confirmedPassword);
+        userService.signUp(username, email, password, confirmedPassword);
         //then
-        assertEquals(1, result);
     }
 
     @Test(expected = ServiceException.class)

@@ -1,6 +1,6 @@
-package by.epam.corporate_education.controller.command.util.impl;
+package by.epam.corporate_education.controller.util.impl;
 
-import by.epam.corporate_education.controller.command.util.api.PaginationCurrentPage;
+import by.epam.corporate_education.controller.util.api.PaginationCurrentPage;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;

@@ -16,7 +16,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_SIGN_IN;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof SignInCommand);
     }
@@ -26,7 +26,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof SignInCommand);
     }
@@ -36,7 +36,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_SIGN_UP;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof SignUpCommand);
     }
@@ -46,7 +46,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof SignUpCommand);
     }
@@ -56,7 +56,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_SIGN_OUT;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof SignOutCommand);
     }
@@ -66,7 +66,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof SignOutCommand);
     }
@@ -76,7 +76,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_VIEW_ALL_TRAININGS;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ViewAllTrainingsCommand);
     }
@@ -86,7 +86,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ViewAllTrainingsCommand);
     }
@@ -96,7 +96,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_REDIRECT_FORGOT_PASSWORD;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof RedirectToForgotPasswordCommand);
     }
@@ -106,7 +106,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof RedirectToForgotPasswordCommand);
     }
@@ -116,7 +116,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_REDIRECT_SIGN_UP;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof RedirectToSignUpCommand);
     }
@@ -126,7 +126,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof RedirectToSignUpCommand);
     }
@@ -136,7 +136,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_FORWARD_TO_MAIN;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ForwardToMainPageCommand);
     }
@@ -146,7 +146,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ForwardToMainPageCommand);
     }
@@ -156,7 +156,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_VIEW_ALL_USERS;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ViewAllUsersCommand);
     }
@@ -166,7 +166,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ViewAllUsersCommand);
     }
@@ -176,7 +176,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_VIEW_USER;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ViewUserCommand);
     }
@@ -186,7 +186,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ViewUserCommand);
     }
@@ -196,7 +196,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_VIEW_TRAINING;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ViewTrainingCommand);
     }
@@ -206,7 +206,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ViewTrainingCommand);
     }
@@ -216,7 +216,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_REMOVE_TRAINING;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof RemoveTrainingCommand);
     }
@@ -226,7 +226,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof RemoveTrainingCommand);
     }
@@ -236,7 +236,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_RESTORE_TRAINING;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof RestoreTrainingCommand);
     }
@@ -246,7 +246,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof RestoreTrainingCommand);
     }
@@ -256,7 +256,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_EDIT_TRAINING;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof EditTrainingCommand);
     }
@@ -266,7 +266,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof EditTrainingCommand);
     }
@@ -276,7 +276,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_FORWARD_EDIT_TRAINING;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ForwardEditTrainingCommand);
     }
@@ -286,7 +286,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ForwardEditTrainingCommand);
     }
@@ -296,7 +296,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_CHANGE_BANNED_STATUS;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ChangeBannedStatusCommand);
     }
@@ -306,7 +306,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ChangeBannedStatusCommand);
     }
@@ -316,9 +316,9 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_FORWARD_ENROLL_TRAINING;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
-        assertTrue(command instanceof ForwardEnrollTrainingCommand);
+        assertTrue(command instanceof ForwardQueryTrainingCommand);
     }
 
     @Test
@@ -326,9 +326,9 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
-        assertFalse(command instanceof ForwardEnrollTrainingCommand);
+        assertFalse(command instanceof ForwardQueryTrainingCommand);
     }
 
     @Test
@@ -336,7 +336,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_CHANGE_LOCALE;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ChangeLocaleCommand);
     }
@@ -346,7 +346,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ChangeLocaleCommand);
     }
@@ -356,9 +356,9 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_ENROLL_TRAINING;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
-        assertTrue(command instanceof EnrollTrainingCommand);
+        assertTrue(command instanceof WriteTrainingQueryCommand);
     }
 
     @Test
@@ -366,9 +366,9 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
-        assertFalse(command instanceof EnrollTrainingCommand);
+        assertFalse(command instanceof WriteTrainingQueryCommand);
     }
 
     @Test
@@ -376,7 +376,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_VIEW_ALL_QUERIES;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ViewAllQueriesCommand);
     }
@@ -386,7 +386,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ViewAllQueriesCommand);
     }
@@ -396,7 +396,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_UNDO_QUERY;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof UndoQueryCommand);
     }
@@ -406,7 +406,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof UndoQueryCommand);
     }
@@ -416,7 +416,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_SET_LIKE;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof PutTrainingLikeCommand);
     }
@@ -426,7 +426,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof PutTrainingLikeCommand);
     }
@@ -436,7 +436,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_SET_DISLIKE;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof PutTrainingDislikeCommand);
     }
@@ -446,7 +446,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof PutTrainingDislikeCommand);
     }
@@ -456,7 +456,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_VIEW_ALL_TRAINER_TRAININGS;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ViewAllTrainerTrainingsCommand);
     }
@@ -466,7 +466,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ViewAllTrainerTrainingsCommand);
     }
@@ -476,7 +476,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_PUT_OFF_LIKE;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof PutOffTrainingLikeCommand);
     }
@@ -486,7 +486,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof PutOffTrainingLikeCommand);
     }
@@ -496,7 +496,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_PUT_OFF_DISLIKE;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof PutOffTrainingDislikeCommand);
     }
@@ -506,7 +506,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof PutOffTrainingDislikeCommand);
     }
@@ -516,7 +516,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_VIEW_TRAINING_QUERIES;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof ViewTrainingQueriesCommand);
     }
@@ -526,7 +526,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof ViewTrainingQueriesCommand);
     }
@@ -536,7 +536,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = CommandName.COMMAND_SET_QUERY_ANSWER;
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertTrue(command instanceof SetQueryAnswerCommand);
     }
@@ -546,7 +546,7 @@ public class CommandFactoryTest {
         //given
         //when
         commandName = "";
-        Command command = commandFactory.createCommand(commandName);
+        Command command = commandFactory.createCommand(commandName, null, null);
         //then
         assertFalse(command instanceof SetQueryAnswerCommand);
     }

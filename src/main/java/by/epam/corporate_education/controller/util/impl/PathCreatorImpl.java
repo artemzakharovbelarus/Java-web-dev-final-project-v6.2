@@ -1,6 +1,6 @@
-package by.epam.corporate_education.controller.command.util.impl;
+package by.epam.corporate_education.controller.util.impl;
 
-import by.epam.corporate_education.controller.command.util.api.PathCreator;
+import by.epam.corporate_education.controller.util.api.PathCreator;
 
 public class PathCreatorImpl implements PathCreator {
     private final static String ERROR = "error";
@@ -13,17 +13,45 @@ public class PathCreatorImpl implements PathCreator {
     private final static String FORWARD_ENROLL_TRAINING = "enroll-training";
     private final static String MAIN_PAGE = "main-page";
     private final static String FORWARD_FORGOT_PASSWORD = "/controller?command=forward-forgot-password";
+    private final static String FORGOT_PASSWORD = "forgot-password";
     private final static String FORWARD_SIGN_UP = "/controller?command=forward-sign-up";
-    private final static String FORWARD_ALL_TRAININGS = "trainings-page";
+    private final static String TRAININGS_PAGE = "trainings-page";
     private final static String SIGN_IN = "sign-in";
     private final static String SIGN_UP = "sign-up";
     private final static String ID_USER = "/controller?idUser=";
     private final static String VIEW_ALL_QUERIES = "&command=view-all-queries";
     private final static String QUERIES_PAGE = "queries-page";
-    private final static String TRAINER_TRAININGS_PAGE = "trainer-trainings-page";
     private final static String TRAINING_PAGE = "training-page";
     private final static String USER_PAGE = "user-page";
     private final static String TRAINING_QUERIES = "&command=view-training-queries";
+    private final static String USERS_PAGE = "users-page";
+    private final static String TRAINING_QUERIES_NOT_COMMAND = "training-queries";
+    private final static String TRAINER_TRAININGS = "trainer-trainings-page";
+
+    @Override
+    public String getTrainerTrainings() {
+        return TRAINER_TRAININGS;
+    }
+
+    @Override
+    public String getForgotPassword() {
+        return FORGOT_PASSWORD;
+    }
+
+    @Override
+    public String getTrainingQueries() {
+        return TRAINING_QUERIES_NOT_COMMAND;
+    }
+
+    @Override
+    public String getTrainingsPage() {
+        return TRAININGS_PAGE;
+    }
+
+    @Override
+    public String getUsersPage() {
+        return USERS_PAGE;
+    }
 
     @Override
     public String getTrainingQueries(String contextPath, int idTraining) {
@@ -38,11 +66,6 @@ public class PathCreatorImpl implements PathCreator {
     @Override
     public String getTrainingPage() {
         return TRAINING_PAGE;
-    }
-
-    @Override
-    public String getTrainerTrainings() {
-        return TRAINER_TRAININGS_PAGE;
     }
 
     @Override

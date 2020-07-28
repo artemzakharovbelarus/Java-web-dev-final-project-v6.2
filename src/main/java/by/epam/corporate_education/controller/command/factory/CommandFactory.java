@@ -3,9 +3,13 @@ package by.epam.corporate_education.controller.command.factory;
 import by.epam.corporate_education.controller.command.Command;
 import by.epam.corporate_education.controller.command.impl.*;
 import by.epam.corporate_education.controller.command.impl.ChangeLocaleCommand;
+import by.epam.corporate_education.controller.util.ControllerUtilFactory;
+import by.epam.corporate_education.controller.util.api.HttpRequestResponseKeeper;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,9 +35,9 @@ public class CommandFactory {
         operations.put(CommandName.COMMAND_EDIT_TRAINING, new EditTrainingCommand());
         operations.put(CommandName.COMMAND_FORWARD_EDIT_TRAINING, new ForwardEditTrainingCommand());
         operations.put(CommandName.COMMAND_CHANGE_BANNED_STATUS, new ChangeBannedStatusCommand());
-        operations.put(CommandName.COMMAND_FORWARD_ENROLL_TRAINING, new ForwardEnrollTrainingCommand());
+        operations.put(CommandName.COMMAND_FORWARD_ENROLL_TRAINING, new ForwardQueryTrainingCommand());
         operations.put(CommandName.COMMAND_CHANGE_LOCALE, new ChangeLocaleCommand());
-        operations.put(CommandName.COMMAND_ENROLL_TRAINING, new EnrollTrainingCommand());
+        operations.put(CommandName.COMMAND_ENROLL_TRAINING, new WriteTrainingQueryCommand());
         operations.put(CommandName.COMMAND_VIEW_ALL_QUERIES, new ViewAllQueriesCommand());
         operations.put(CommandName.COMMAND_UNDO_QUERY, new UndoQueryCommand());
         operations.put(CommandName.COMMAND_SET_LIKE, new PutTrainingLikeCommand());
@@ -45,7 +49,11 @@ public class CommandFactory {
         operations.put(CommandName.COMMAND_SET_QUERY_ANSWER, new SetQueryAnswerCommand());
     }
 
-    public Command createCommand(String commandName){
+    public Command createCommand(String commandName, HttpServletRequest request, HttpServletResponse response){
+        ControllerUtilFactory utilFactory = ControllerUtilFactory.getINSTANCE();
+        HttpRequestResponseKeeper keeper = utilFactory.getHttpRequestResponseKeeper();
+        keeper.setAll(request, response);
+
         Command command = null;
         try{
             command = operations.get(commandName);

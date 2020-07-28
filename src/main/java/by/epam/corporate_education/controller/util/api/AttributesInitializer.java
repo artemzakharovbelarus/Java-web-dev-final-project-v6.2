@@ -1,4 +1,4 @@
-package by.epam.corporate_education.controller.command.util.api;
+package by.epam.corporate_education.controller.util.api;
 
 import by.epam.corporate_education.entity.NewsItem;
 import by.epam.corporate_education.entity.Query;
@@ -23,5 +23,4 @@ public interface AttributesInitializer {
     public void setRequestAttributesLike(HttpServletRequest request, boolean likeEnabled);
     public void setRequestAttributesDislike(HttpServletRequest request, boolean dislikeEnabled);
     public void setRequestAttributesUser(HttpServletRequest request, User user);
-    public void setRequestAttributesFullQuery(HttpServletRequest request, Query query);
 }

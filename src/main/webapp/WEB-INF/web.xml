@@ -18,6 +18,67 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>PageSecurityFilter</filter-name>
+        <filter-class>by.epam.corporate_education.controller.filter.PageSecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/main-page</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/sign-in</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/trainings-page</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/users-page</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/training-page</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/user-page</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/error-404</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/sign-up</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/restore-password</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/edit-training</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/enroll-training</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/queries-page</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/trainer-trainings-page</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/training-queries</url-pattern>
+    </filter-mapping>
+
     <listener>
         <listener-class>by.epam.corporate_education.controller.ApplicationListener</listener-class>
     </listener>
@@ -34,6 +95,7 @@
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
+
     <servlet>
         <servlet-name>SignIn</servlet-name>
         <jsp-file>/index.jsp</jsp-file>
@@ -114,19 +176,9 @@
         <servlet-name>TrainingPage</servlet-name>
         <jsp-file>/WEB-INF/jsp/training-page.jsp</jsp-file>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>TrainingPage</servlet-name>
         <url-pattern>/training-page</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AjaxController</servlet-name>
-        <servlet-class>by.epam.corporate_education.controller.AjaxController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AjaxController</servlet-name>
-        <url-pattern>/ajax-controller</url-pattern>
     </servlet-mapping>
 
     <servlet>

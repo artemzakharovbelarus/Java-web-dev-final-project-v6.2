@@ -2,17 +2,22 @@ package by.epam.corporate_education.controller.command.impl;
 
 import by.epam.corporate_education.controller.command.Command;
 import by.epam.corporate_education.controller.command.CommandException;
-import by.epam.corporate_education.controller.command.util.CommandUtilFactory;
-import by.epam.corporate_education.controller.command.util.api.PathCreator;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import by.epam.corporate_education.controller.util.ControllerUtilFactory;
+import by.epam.corporate_education.controller.util.api.PathCreator;
 
 public class RedirectToForgotPasswordCommand implements Command {
 
+    private ControllerUtilFactory utilFactory = ControllerUtilFactory.getINSTANCE();
+
+    public RedirectToForgotPasswordCommand(){}
+
+    //annotation
+    public RedirectToForgotPasswordCommand(ControllerUtilFactory utilFactory){
+        this.utilFactory = utilFactory;
+    }
+
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        CommandUtilFactory utilFactory = CommandUtilFactory.getINSTANCE();
+    public String execute() throws CommandException {
         PathCreator pathCreator = utilFactory.getPathCreator();
 
         String path = pathCreator.getForwardForgotPassword();

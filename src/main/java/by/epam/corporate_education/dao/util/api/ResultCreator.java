@@ -1,5 +1,6 @@
 package by.epam.corporate_education.dao.util.api;
 
+import by.epam.corporate_education.entity.NewsItem;
 import by.epam.corporate_education.entity.Query;
 import by.epam.corporate_education.entity.Training;
 import by.epam.corporate_education.entity.User;
@@ -17,4 +18,5 @@ public interface ResultCreator {
     public int getDislikesAmount(ResultSet resultSet) throws SQLException;
     public boolean getEnabledStatus(ResultSet resultSet) throws SQLException;
     public Query getFullQueryToTraining(ResultSet resultSet) throws SQLException;
+    public NewsItem getNextNews(ResultSet resultSet) throws SQLException;
 }

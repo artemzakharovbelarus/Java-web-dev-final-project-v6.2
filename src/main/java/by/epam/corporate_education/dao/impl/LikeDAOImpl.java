@@ -26,13 +26,18 @@ public class LikeDAOImpl implements LikeDAO {
     public void changeEnabledStatus(Like like) throws DAOException {
         String request = SQLRequest.CHANGE_LIKE_ENABLED_STATUS;
 
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initLikeEnabled(statement, like.getIdTraining(), like.getIdUser());
             statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 
@@ -40,10 +45,13 @@ public class LikeDAOImpl implements LikeDAO {
     public boolean getLikeEnabledStatus(Like like) throws DAOException {
         String request = SQLRequest.GET_LIKE_ENABLED_STATUS;
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
         boolean result = false;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initDislikeEnabled(statement, like.getIdTraining(), like.getIdUser());
             resultSet = statement.executeQuery();
@@ -52,6 +60,8 @@ public class LikeDAOImpl implements LikeDAO {
             }
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement, resultSet);
         }
         return result;
     }
@@ -60,10 +70,13 @@ public class LikeDAOImpl implements LikeDAO {
     public int getTrainingLikesAmount(int idTraining) throws DAOException {
         String request = SQLRequest.GET_TRAINING_LIKES;
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
         int result = 0;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initLikes(statement, idTraining);
             resultSet = statement.executeQuery();
@@ -75,7 +88,7 @@ public class LikeDAOImpl implements LikeDAO {
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         return result;
     }
@@ -84,13 +97,18 @@ public class LikeDAOImpl implements LikeDAO {
     public void addTrainingLike(Like like) throws DAOException {
         String request = SQLRequest.ADD_TRAINING_LIKE;
 
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initLike(statement, like.getIdTraining(), like.getIdUser());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 }

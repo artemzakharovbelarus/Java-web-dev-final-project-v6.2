@@ -9,6 +9,7 @@ import by.epam.corporate_education.dao.util.api.*;
 import by.epam.corporate_education.dao.util.impl.ValueCheckerImpl;
 import by.epam.corporate_education.entity.User;
 
+import java.awt.event.PaintEvent;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +21,18 @@ public class UserDAOImpl implements UserDAO {
     private ResourceCloser resourceCloser = utilFactory.getResourceCloser();
     private ResultCreator resultCreator = utilFactory.getResultCreator();
     private ValueChecker valueChecker = new ValueCheckerImpl();
+    private SortingManager sortingManager = utilFactory.getSortingManager();
 
     @Override
     public User getUser(int idUser) throws DAOException {
         String request = SQLRequest.GET_USER_BY_ID;
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
-        try(Connection connection = connectionPool.takeConnection();
-            PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initUser(statement, idUser);
             resultSet = statement.executeQuery();
@@ -38,7 +43,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e){
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         throw new DAOException("No user with ID: " + idUser + " in database");
     }
@@ -47,10 +52,14 @@ public class UserDAOImpl implements UserDAO {
     public User getUser(String username, String password) throws DAOException {
         String request = SQLRequest.GET_USER;
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
+
         User user = new User();
-        try(Connection connection = connectionPool.takeConnection();
-            PreparedStatement statement = connection.prepareStatement(request)){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             valueChecker.checkPasswordsEquals(connection, username, password);
             statementInitializer.initUser(statement, username);
@@ -62,7 +71,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e){
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         return user;
     }
@@ -72,8 +81,11 @@ public class UserDAOImpl implements UserDAO {
         String request = SQLRequest.ADD_NEW_USER;
         int result;
 
-        try(Connection connection = connectionPool.takeConnection();
-            PreparedStatement statement = connection.prepareStatement(request)){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             valueChecker.checkAll(connection, user.getUsername(), user.getEmail());
 
@@ -81,6 +93,8 @@ public class UserDAOImpl implements UserDAO {
             result = statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
         return result;
     }
@@ -90,9 +104,12 @@ public class UserDAOImpl implements UserDAO {
         String request = SQLRequest.GET_ALL_USERS;
         List<User> users = new ArrayList<>();
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
-        try(Connection connection = connectionPool.takeConnection();
-            Statement statement = connection.createStatement()){
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             resultSet = statement.executeQuery(request);
             while (resultSet.next()){
@@ -102,22 +119,25 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e){
             throw new DAOException(e);
         } finally {
-           resourceCloser.close(resultSet);
+           resourceCloser.close(connection, statement, resultSet);
         }
         return users;
     }
 
     @Override
     public List<User> getAllUsersSorted(String parameter, String typeSorting) throws DAOException {
+        String request = sortingManager.getSortingRequest(parameter, typeSorting);
+
         List<User> usersSorted = new ArrayList<>();
-        SortingManager sortingManager = utilFactory.getSortingManager();
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
-        try (Connection connection = connectionPool.takeConnection();
-            Statement statement = connection.createStatement()){
-            String request = sortingManager.getSortingRequest(parameter, typeSorting);
-            resultSet = statement.executeQuery(request);
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
+            resultSet = statement.executeQuery(request);
             while (resultSet.next()){
                 User user = resultCreator.getNextUser(resultSet);
                 usersSorted.add(user);
@@ -125,7 +145,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e){
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         return usersSorted;
     }
@@ -138,40 +158,59 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void changeBannedStatus(int idUser, boolean status) throws DAOException {
         String request = SQLRequest.CHANGE_BANNED_STATUS;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initUser(statement, status, idUser);
             statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 
     @Override
     public void changeUserStatus(int idUser, int idStatus) throws DAOException {
         String request = SQLRequest.CHANGE_USER_STATUS;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initUser(statement, idUser, idStatus);
             statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 
     @Override
     public void changeLeaderStatus(int idUser) throws DAOException {
         String request = SQLRequest.CHANGE_LEADER_STATUS;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request)){
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
+
             User user = getUser(idUser);
 
             statementInitializer.initUser(statement, idUser, user);
             statement.executeUpdate();
         } catch (SQLException e){
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection, statement);
         }
     }
 
@@ -179,9 +218,12 @@ public class UserDAOImpl implements UserDAO {
     public User getAllUserInformation(int idUser) throws DAOException {
         String request = SQLRequest.GET_ALL_USER_INFORMATION;
 
+        Connection connection = null;
+        PreparedStatement statement = null;
         ResultSet resultSet = null;
-        try (Connection connection = connectionPool.takeConnection();
-             PreparedStatement statement = connection.prepareStatement(request);) {
+        try {
+            connection = connectionPool.takeConnection();
+            statement = connection.prepareStatement(request);
 
             statementInitializer.initUserInfo(statement, idUser);
             resultSet = statement.executeQuery();
@@ -191,25 +233,35 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             throw new DAOException(e);
         } finally {
-            resourceCloser.close(resultSet);
+            resourceCloser.close(connection, statement, resultSet);
         }
         throw new DAOException("No user with ID: " + idUser + " in database");
     }
 
     private void changeOnlineStatus(Connection connection, boolean status, int idUser) throws SQLException{
         String request = SQLRequest.CHANGE_ONLINE_STATUS;
-        try (PreparedStatement statement = connection.prepareStatement(request)){
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(request);
+
             statementInitializer.initUser(statement, status, idUser);
             statement.executeUpdate();
+        } finally {
+            resourceCloser.close(statement);
         }
     }
 
     @Override
     public void changeOnlineStatus(int idUser, boolean status) throws DAOException {
-        try (Connection connection = connectionPool.takeConnection()){
+        Connection connection = null;
+        try {
+            connection = connectionPool.takeConnection();
+
             changeOnlineStatus(connection, status, idUser);
         } catch (SQLException e) {
             throw new DAOException(e);
+        } finally {
+            resourceCloser.close(connection);
         }
     }
 }

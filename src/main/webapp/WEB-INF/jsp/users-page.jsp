@@ -117,7 +117,7 @@
                         <form action="controller" method="post">
                             <input type="hidden" name="idUser" value="${user.idUser}">
                             <input type="hidden" name="bann" value="${user.bannedStatus}"/>
-                        <td style="text-align: left; vertical-align: middle">
+                        <td style="text-align: center; vertical-align: middle">
                             <c:if test="${sessionScope.idUser != user.idUser}">
                                 <c:choose>
                                     <c:when test="${user.bannedStatus == true}">

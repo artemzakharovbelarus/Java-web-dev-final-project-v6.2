@@ -1,6 +1,8 @@
 package by.epam.corporate_education.dao.pool;
 
 import by.epam.corporate_education.dao.exception.DBPoolException;
+import by.epam.corporate_education.dao.util.DAOUtilFactory;
+import by.epam.corporate_education.dao.util.api.ResourceCloser;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j;
 
@@ -13,6 +15,8 @@ import java.util.concurrent.Executor;
 
 @Log4j
 public class DBConnectionPool {
+    private DAOUtilFactory utilFactory = DAOUtilFactory.getINSTANCE();
+    private ResourceCloser resourceCloser = utilFactory.getResourceCloser();
 
     @Getter
     private final static DBConnectionPool INSTANCE = new DBConnectionPool();
@@ -85,41 +89,11 @@ public class DBConnectionPool {
     }
 
     public void closeConnection(Connection connection, Statement statement, ResultSet set){
-        if (connection != null){
-            try {
-                connection.close();
-            } catch (SQLException e){
-                log.error(e);
-            }
-        } else if (set != null){
-            try {
-                set.close();
-            } catch (SQLException e){
-                log.error(e);
-            }
-        } else if (statement != null){
-            try {
-                statement.close();
-            } catch (SQLException e){
-                log.error(e);
-            }
-        }
+        resourceCloser.close(connection, statement, set);
     }
 
     public void closeConnection(Connection connection, Statement statement) {
-        if (connection != null){
-            try {
-                connection.close();
-            } catch (SQLException e){
-                log.error(e);
-            }
-        } else if (statement != null){
-            try {
-                statement.close();
-            } catch (SQLException e){
-                log.error(e);
-            }
-        }
+        resourceCloser.close(connection, statement);
     }
 
     private void closeConnectionQueue(BlockingQueue<Connection> queue) throws SQLException{

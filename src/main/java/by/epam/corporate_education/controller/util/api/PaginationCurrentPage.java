@@ -1,4 +1,4 @@
-package by.epam.corporate_education.controller.command.util.api;
+package by.epam.corporate_education.controller.util.api;
 
 import javax.servlet.http.HttpServletRequest;
 

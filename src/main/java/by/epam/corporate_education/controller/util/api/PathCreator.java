@@ -1,4 +1,4 @@
-package by.epam.corporate_education.controller.command.util.api;
+package by.epam.corporate_education.controller.util.api;
 
 public interface PathCreator {
     public String getError();
@@ -17,8 +17,12 @@ public interface PathCreator {
     public String getSignUp();
     public String getForwardQueries(String contextPath, int idUser);
     public String getQueries();
-    public String getTrainerTrainings();
     public String getTrainingPage();
     public String getUserPage();
     public String getTrainingQueries(String contextPath, int idTraining);
+    public String getUsersPage();
+    public String getTrainingsPage();
+    public String getTrainingQueries();
+    public String getForgotPassword();
+    public String getTrainerTrainings();
 }
