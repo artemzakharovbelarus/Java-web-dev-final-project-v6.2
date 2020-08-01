@@ -24,8 +24,6 @@ public class CommandFactory {
         operations.put(CommandName.COMMAND_SIGN_UP, new SignUpCommand());
         operations.put(CommandName.COMMAND_SIGN_OUT, new SignOutCommand());
         operations.put(CommandName.COMMAND_VIEW_ALL_TRAININGS, new ViewAllTrainingsCommand());
-        operations.put(CommandName.COMMAND_REDIRECT_FORGOT_PASSWORD, new RedirectToForgotPasswordCommand());
-        operations.put(CommandName.COMMAND_REDIRECT_SIGN_UP, new RedirectToSignUpCommand());
         operations.put(CommandName.COMMAND_FORWARD_TO_MAIN, new ForwardToMainPageCommand());
         operations.put(CommandName.COMMAND_VIEW_ALL_USERS, new ViewAllUsersCommand());
         operations.put(CommandName.COMMAND_VIEW_USER, new ViewUserCommand());
@@ -47,6 +45,8 @@ public class CommandFactory {
         operations.put(CommandName.COMMAND_PUT_OFF_LIKE, new PutOffTrainingLikeCommand());
         operations.put(CommandName.COMMAND_VIEW_TRAINING_QUERIES, new ViewTrainingQueriesCommand());
         operations.put(CommandName.COMMAND_SET_QUERY_ANSWER, new SetQueryAnswerCommand());
+        operations.put(CommandName.COMMAND_VIEW_PROFILE, new ViewProfileCommand());
+        operations.put(CommandName.COMMAND_FORWARD_EDIT_PROFILE, new ForwardEditProfileCommand());
     }
 
     public Command createCommand(String commandName, HttpServletRequest request, HttpServletResponse response){

@@ -27,4 +27,5 @@ public interface UserService {
     public boolean isDislikeEnabled(int idTraining, int idUser) throws ServiceException;
     public void putOffLike(int idTraining, int idUser) throws ServiceException;
     public void putOffDislike(int idTraining, int idUser) throws ServiceException;
+    public User viewProfile(int idUser) throws ServiceException;
 }

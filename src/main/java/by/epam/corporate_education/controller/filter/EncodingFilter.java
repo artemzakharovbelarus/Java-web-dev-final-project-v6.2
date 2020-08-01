@@ -1,5 +1,7 @@
 package by.epam.corporate_education.controller.filter;
 
+import by.epam.corporate_education.controller.util.ParameterName;
+
 import javax.servlet.*;
 import java.io.IOException;
 
@@ -7,10 +9,10 @@ public class EncodingFilter implements Filter {
     private String encoding;
 
     public void init(FilterConfig config) throws ServletException {
-        encoding = config.getInitParameter("EncodingFilter");
+        encoding = config.getInitParameter(ParameterName.ENCODING_FILTER);
 
         if (encoding == null){
-            encoding = "UTF-8";
+            encoding = ParameterName.ENCODING;
         }
     }
 

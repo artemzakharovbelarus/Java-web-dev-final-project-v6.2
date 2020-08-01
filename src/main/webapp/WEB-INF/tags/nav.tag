@@ -116,17 +116,16 @@
                     <i class="fa fa-cog" aria-hidden="true"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/controller?command=view-profile">
                         <i class="fa fa-address-card-o" aria-hidden="true"></i>
                         <fmt:message key="local.profile"/>
                     </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-building-o" aria-hidden="true"></i>
-                        <fmt:message key="local.about-us"/>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/controller?command=forward-edit-profile">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                        <fmt:message key="local.profile-editing"/>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <form action="controller" method="get">
-                        <input type="hidden" name="online-status" value="${online}"/>
+                    <form action="controller" method="post">
                         <button type="submit" name="command" value="sign-out" class="dropdown-item">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             <fmt:message key="local.sign-out"/>

@@ -66,7 +66,7 @@
                                                          style="height: 200px; width: 290px;">
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <img src="${training.trainingPhoto}"
+                                                    <img src="data:image/*;base64, ${training.trainingPhoto}"
                                                          class="card-img-top bg-dark avatar img-circle img-thumbnail"
                                                          data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
                                                          alt="Card image cap"
@@ -135,7 +135,7 @@
                                                              style="height: 200px; width: 290px;">
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <img src="${training.trainingPhoto}"
+                                                        <img src="data:image/*;base64, ${training.trainingPhoto}"
                                                              class="card-img-top bg-dark avatar img-circle img-thumbnail"
                                                              data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
                                                              alt="Card image cap"

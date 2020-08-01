@@ -10,6 +10,7 @@ import by.epam.corporate_education.controller.util.api.PathCreator;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.UserService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,7 @@ public class PutOffTrainingLikeCommand implements Command {
         userService = serviceFactory.getUserServiceImpl();
     }
 
-    //annotation
+    @ConstructorForTest
     public PutOffTrainingLikeCommand(UserService userService, ControllerUtilFactory utilFactory){
         this.userService = userService;
         this.utilFactory = utilFactory;

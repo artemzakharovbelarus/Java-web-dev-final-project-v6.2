@@ -58,12 +58,11 @@
                                     <img style="height: 110px; width: 195px;" src="<c:url value="/img/default-tr.png"/>" alt="" class="profile-img img-responsive center-block">
                                 </c:when>
                                 <c:otherwise>
-                                    <img style="height: 110px; width: 195px;" src="<c:url value="${training.trainingPhoto}"/>" alt="" class="profile-img img-responsive center-block">
+                                    <img style="height: 110px; width: 195px;" src="<c:url value="data:image/*;base64, ${training.trainingPhoto}"/>" alt="" class="profile-img img-responsive center-block">
                                 </c:otherwise>
                             </c:choose>
                         </c:if>
                         <div>
-
                         </div>
                     </div>
                 </div>
@@ -76,7 +75,7 @@
                         <br>
                         <div class="row profile-user-info">
                             <div class="col-sm-8">
-                                <form action="controller" method="post">
+                                <form action="controller" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="idTraining" value="${training.idTraining}"/>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -171,12 +170,9 @@
                                     <h4></h4>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupFileAddon01"><fmt:message key="local.photo"/></span>
+                                            <p class="text-white"><fmt:message key="local.photo"/></p>
                                         </div>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                            <label class="custom-file-label" for="inputGroupFile01"><fmt:message key="local.choose-file"/></label>
-                                        </div>
+                                        <input type="file" name="training-photo" class="form-control-file" id="exampleFormControlFile1">
                                     </div>
                                     <button type="submit" name="command" value="edit-training" class="btn btn-outline-success">
                                         <h7><fmt:message key="local.save"/> <i class="fa fa-floppy-o" aria-hidden="true"></i></h7>

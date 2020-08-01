@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `corporate_education_v2`.`trainings` (
   `max_members` INT NULL,
   `start_date` DATE NULL,
   `end_date` DATE NULL,
-  `training_image` VARCHAR(90) NULL,
+  `training_image` MEDIUMBLOB NULL,
   `idUser` INT NOT NULL,
   PRIMARY KEY (`idTraining`),
   UNIQUE INDEX `idTraining_UNIQUE` (`idTraining` ASC) VISIBLE,
@@ -254,11 +254,11 @@ INSERT INTO `users` (`username`, `password`, `email`, `banned_status`, `idRole`)
 
 INSERT INTO `users_additional_info` (`name`, `surname`, `sex`, `birth_date`, `github`, `linkedIn`, `idUser`) VALUES ('Artem', 'Zakharov', true, '1999-10-16', 'https://github.com/ArtemZakharovBY', 'https://www.linkedin.com/in/artem-zakharov-751b78194/', 1);
 
-INSERT INTO `trainings` (`title`, `requirements`, `information`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`, `training_image`) VALUES ('Java web development', 'Владение хорошими знаниями Java EE, JDBC, Maven', 'Данные тренинг обучит технологиям Java EE и таким фреймворкам, как Spring MVC, Hibernate, Angular.js', 'Минск', 20, 15, 20, '2020-07-10', '2020-08-10', 2, 'img/java-pic-tr.jpg');
-INSERT INTO `trainings` (`title`, `requirements`, `information`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`, `training_image`) VALUES ('PHP web development', 'Иметь представление о Laravel', 'Данные тренинг обучит технологиям Laravel, PHPAdmin и Bootstrap 4', 'Минск', 20, 15, 20, '2020-07-10', '2020-08-10', 2, 'img/php-pic-tr.jpg');
-INSERT INTO `trainings` (`title`, `requirements`, `information`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`, `training_image`) VALUES ('Clean code', 'Have basic knowledge in OOP', 'This new training will give you good principles in OOP code writing', 'New-York', 20, 15, 20, '2020-07-10', '2020-08-10', 2, 'img/code-pic-tr.jpg');
-INSERT INTO `trainings` (`title`, `requirements`, `information`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`, `training_image`) VALUES ('Web-services', 'Have some knowledge in REST', 'Данный тренинг обучит вас подходу в разработке веб-сервисов REST', 'Брест', 20, 15, 20, '2020-07-10', '2020-08-10', 2, 'img/service-pic-tr.jpg');
-INSERT INTO `trainings` (`title`, `requirements`, `information`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`, `training_image`) VALUES ('Development methodologies', 'Have some knowledge in Agile', 'This training will give you good knowledge in Development methodologies, after ending the training you will understand Agile, XP methodologies', 'London', 20, 15, 20, '2020-07-10', '2020-08-10', 2, 'img/soft-pic-tr.jpg');
+INSERT INTO `trainings` (`title`, `requirements`, `information`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`) VALUES ('Java web development', 'Владение хорошими знаниями Java EE, JDBC, Maven', 'Данные тренинг обучит технологиям Java EE и таким фреймворкам, как Spring MVC, Hibernate, Angular.js', 'Минск', 20, 15, 20, '2020-07-10', '2020-08-10', 2);
+INSERT INTO `trainings` (`title`, `requirements`, `information`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`) VALUES ('PHP web development', 'Иметь представление о Laravel', 'Данные тренинг обучит технологиям Laravel, PHPAdmin и Bootstrap 4', 'Минск', 20, 15, 20, '2020-07-10', '2020-08-10', 2);
+INSERT INTO `trainings` (`title`, `requirements`, `information`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`) VALUES ('Clean code', 'Have basic knowledge in OOP', 'This new training will give you good principles in OOP code writing', 'New-York', 20, 15, 20, '2020-07-10', '2020-08-10', 2);
+INSERT INTO `trainings` (`title`, `requirements`, `information`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`) VALUES ('Web-services', 'Have some knowledge in REST', 'Данный тренинг обучит вас подходу в разработке веб-сервисов REST', 'Брест', 20, 15, 20, '2020-07-10', '2020-08-10', 2);
+INSERT INTO `trainings` (`title`, `requirements`, `information`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`) VALUES ('Development methodologies', 'Have some knowledge in Agile', 'This training will give you good knowledge in Development methodologies, after ending the training you will understand Agile, XP methodologies', 'London', 20, 15, 20, '2020-07-10', '2020-08-10', 2);
 INSERT INTO `trainings` (`title`, `requirements`, `information`, `deleted_status`, `city`, `hours_amount`, `min_members`, `max_members`, `start_date`, `end_date`, `idUser`) VALUES ('English training', 'Have some knowledge in English (A1)', 'English is necessary nowadays and this training will give a basic knowledge', true, 'Rome', 20, 15, 20, '2020-07-10', '2020-08-10', 2);
 
 INSERT INTO `news` (`news_intro`,`news_text`, `news_image`, `idUser`) VALUES ('Компания Oracle', 'Вышла Java 14, почему же это прорыв?', '/img/oracle-news.jpg', 1);

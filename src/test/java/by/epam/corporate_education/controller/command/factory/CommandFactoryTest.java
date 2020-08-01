@@ -92,46 +92,6 @@ public class CommandFactoryTest {
     }
 
     @Test
-    public void createCommand_redirectForgotPassword_correct(){
-        //given
-        //when
-        commandName = CommandName.COMMAND_REDIRECT_FORGOT_PASSWORD;
-        Command command = commandFactory.createCommand(commandName, null, null);
-        //then
-        assertTrue(command instanceof RedirectToForgotPasswordCommand);
-    }
-
-    @Test
-    public void createCommand_redirectForgotPassword_invalid(){
-        //given
-        //when
-        commandName = "";
-        Command command = commandFactory.createCommand(commandName, null, null);
-        //then
-        assertFalse(command instanceof RedirectToForgotPasswordCommand);
-    }
-
-    @Test
-    public void createCommand_redirectSignUp_correct(){
-        //given
-        //when
-        commandName = CommandName.COMMAND_REDIRECT_SIGN_UP;
-        Command command = commandFactory.createCommand(commandName, null, null);
-        //then
-        assertTrue(command instanceof RedirectToSignUpCommand);
-    }
-
-    @Test
-    public void createCommand_redirectSignUp_invalid(){
-        //given
-        //when
-        commandName = "";
-        Command command = commandFactory.createCommand(commandName, null, null);
-        //then
-        assertFalse(command instanceof RedirectToSignUpCommand);
-    }
-
-    @Test
     public void createCommand_forwardToMain_correct(){
         //given
         //when

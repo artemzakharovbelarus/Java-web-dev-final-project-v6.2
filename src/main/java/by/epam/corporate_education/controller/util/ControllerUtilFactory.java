@@ -2,6 +2,7 @@ package by.epam.corporate_education.controller.util;
 
 import by.epam.corporate_education.controller.util.api.*;
 import by.epam.corporate_education.controller.util.impl.*;
+import by.epam.corporate_education.util.annotation.SetterForTest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,16 @@ public class ControllerUtilFactory {
     private ControllerValueChecker controllerValueChecker = new ControllerValueCheckerImpl();
     @Getter
     private PathCreator pathCreator = new PathCreatorImpl();
-    @Getter @Setter
+    @Getter
     private HttpRequestResponseKeeper httpRequestResponseKeeper = new HttpRequestResponseKeeperImpl();
+
+    @SetterForTest
+    public void setControllerValueChecker(ControllerValueChecker controllerValueChecker) {
+        this.controllerValueChecker = controllerValueChecker;
+    }
+
+    @SetterForTest
+    public void setHttpRequestResponseKeeper(HttpRequestResponseKeeper httpRequestResponseKeeper) {
+        this.httpRequestResponseKeeper = httpRequestResponseKeeper;
+    }
 }

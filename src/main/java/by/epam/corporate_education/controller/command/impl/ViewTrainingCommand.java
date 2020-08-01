@@ -14,6 +14,7 @@ import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.AdminService;
 import by.epam.corporate_education.service.api.UserService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +32,7 @@ public class ViewTrainingCommand implements Command {
         userService = serviceFactory.getUserServiceImpl();
     }
 
-    //annotation
+    @ConstructorForTest
     public ViewTrainingCommand(AdminService adminService, UserService userService, ControllerUtilFactory utilFactory){
         this.adminService = adminService;
         this.userService = userService;

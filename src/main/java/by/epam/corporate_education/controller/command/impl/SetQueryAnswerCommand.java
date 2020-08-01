@@ -11,6 +11,7 @@ import by.epam.corporate_education.controller.util.api.PathCreator;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.TrainerService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,7 @@ public class SetQueryAnswerCommand implements Command {
         trainerService = serviceFactory.getTrainerServiceImpl();
     }
 
-    //annotation
+    @ConstructorForTest
     public SetQueryAnswerCommand(TrainerService trainerService, ControllerUtilFactory utilFactory){
         this.trainerService = trainerService;
         this.utilFactory = utilFactory;

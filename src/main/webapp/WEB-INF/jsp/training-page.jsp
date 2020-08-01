@@ -72,7 +72,7 @@
                                         <img style="height: 110px; width: 195px;" src="<c:url value="/img/default-tr.png"/>" alt="" class="profile-img img-responsive center-block">
                                 </c:when>
                                 <c:otherwise>
-                                    <img style="height: 110px; width: 195px;" src="<c:url value="${training.trainingPhoto}"/>" alt="" class="profile-img img-responsive center-block">
+                                    <img style="height: 110px; width: 195px;" src="<c:url value="data:image/*;base64, ${training.trainingPhoto}"/>" alt="" class="profile-img img-responsive center-block">
                                 </c:otherwise>
                             </c:choose>
                         </c:if>

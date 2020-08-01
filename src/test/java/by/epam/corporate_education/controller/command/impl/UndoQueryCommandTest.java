@@ -63,7 +63,7 @@ public class UndoQueryCommandTest {
         Mockito.doNothing().when(userService).undoQuery(Mockito.anyInt());
         String result = command.execute();
         //then
-        String expected = pathCreator.getForwardQueries(request.getContextPath(), 1);
+        String expected = pathCreator.getForwardQueries(request.getContextPath());
         assertEquals(expected, result);
     }
 }

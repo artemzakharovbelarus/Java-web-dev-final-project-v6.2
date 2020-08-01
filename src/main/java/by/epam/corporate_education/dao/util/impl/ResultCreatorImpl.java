@@ -8,6 +8,7 @@ import by.epam.corporate_education.entity.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Base64;
 
 public class ResultCreatorImpl implements ResultCreator {
 
@@ -93,7 +94,9 @@ public class ResultCreatorImpl implements ResultCreator {
         int maxMembers = resultSet.getInt(ColumnName.TRAINING_MAX_MEMBERS);
         LocalDate startDate = resultSet.getDate(ColumnName.TRAINING_START_DATE).toLocalDate();
         LocalDate endDate = resultSet.getDate(ColumnName.TRAINING_END_DATE).toLocalDate();
-        String imageLink = resultSet.getString(ColumnName.TRAINING_IMAGE);
+        byte[] imageArray = resultSet.getBytes(ColumnName.TRAINING_IMAGE);
+        String img = encodeImage(imageArray);
+
         int idTrainer = resultSet.getInt(ColumnName.TRAINING_ID_USER);
 
         Training training = new Training(idTraining, title,
@@ -101,7 +104,7 @@ public class ResultCreatorImpl implements ResultCreator {
                 deletedStatus, city,
                 hoursAmount, minMembers,
                 maxMembers, startDate,
-                endDate, idTrainer, imageLink);
+                endDate, idTrainer, img);
         return training;
     }
 
@@ -135,5 +138,14 @@ public class ResultCreatorImpl implements ResultCreator {
         user.setLinkedInLink(resultSet.getString(ColumnName.USER_INFO_LINKEDIN));
 
         return user;
+    }
+
+    private String encodeImage(byte[] imgArray){
+        Base64.Encoder base64 = Base64.getEncoder();
+        String img = "";
+        if (imgArray != null) {
+            img = base64.encodeToString(imgArray);
+        }
+        return img;
     }
 }

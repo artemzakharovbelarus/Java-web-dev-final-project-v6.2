@@ -17,6 +17,7 @@ import org.mockito.Mockito;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 
 import static org.junit.Assert.*;
@@ -56,7 +57,7 @@ public class EditTrainingCommandTest {
         Mockito.doNothing().when(adminService).updateTrainingValues(Mockito.anyInt(),
                 Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt(),
                 Mockito.anyInt(), Mockito.anyInt(), Mockito.any(LocalDate.class), Mockito.any(LocalDate.class),
-                Mockito.anyString(), Mockito.anyInt());
+                Mockito.any(InputStream.class), Mockito.anyInt());
         String result = command.execute();
         //then
         String expected = pathCreator.getViewTraining(request.getContextPath(), 1);

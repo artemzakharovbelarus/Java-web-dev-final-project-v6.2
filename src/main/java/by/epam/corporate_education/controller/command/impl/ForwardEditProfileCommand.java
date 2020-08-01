@@ -5,12 +5,12 @@ import by.epam.corporate_education.controller.command.CommandException;
 import by.epam.corporate_education.controller.util.ControllerUtilFactory;
 import by.epam.corporate_education.controller.util.ParameterName;
 import by.epam.corporate_education.controller.util.api.AttributesInitializer;
-import by.epam.corporate_education.controller.util.api.HttpRequestResponseKeeper;
 import by.epam.corporate_education.controller.util.api.ControllerValueChecker;
+import by.epam.corporate_education.controller.util.api.HttpRequestResponseKeeper;
 import by.epam.corporate_education.controller.util.api.PathCreator;
 import by.epam.corporate_education.entity.User;
 import by.epam.corporate_education.service.ServiceFactory;
-import by.epam.corporate_education.service.api.AdminService;
+import by.epam.corporate_education.service.api.UserService;
 import by.epam.corporate_education.service.exception.ServiceException;
 import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
@@ -18,19 +18,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ViewUserCommand implements Command {
+public class ForwardEditProfileCommand implements Command {
 
     private ControllerUtilFactory utilFactory = ControllerUtilFactory.getINSTANCE();
     private ServiceFactory serviceFactory = ServiceFactory.getINSTANCE();
-    private AdminService adminService;
+    private UserService userService = serviceFactory.getUserServiceImpl();
 
-    public ViewUserCommand(){
-        adminService = serviceFactory.getAdminServiceImpl();
+    public ForwardEditProfileCommand(){
+        userService = serviceFactory.getUserServiceImpl();
     }
 
     @ConstructorForTest
-    public ViewUserCommand(AdminService adminService, ControllerUtilFactory utilFactory){
-        this.adminService = adminService;
+    public ForwardEditProfileCommand(UserService userService, ControllerUtilFactory utilFactory){
+        this.userService = userService;
         this.utilFactory = utilFactory;
     }
 
@@ -38,28 +38,28 @@ public class ViewUserCommand implements Command {
     public String execute() throws CommandException {
         ControllerValueChecker valueChecker = utilFactory.getControllerValueChecker();
         PathCreator pathCreator = utilFactory.getPathCreator();
-        AttributesInitializer attributesInitializer = utilFactory.getAttributesInitializer();
         HttpRequestResponseKeeper keeper = utilFactory.getHttpRequestResponseKeeper();
+        AttributesInitializer attributesInitializer = utilFactory.getAttributesInitializer();
 
         HttpServletRequest request = keeper.getRequest();
         HttpServletResponse response = keeper.getResponse();
 
+        String path = pathCreator.getError();
+
         HttpSession session = request.getSession();
+        Integer idUser = (Integer) session.getAttribute(ParameterName.ID_USER);
         int idStatus = (Integer) session.getAttribute(ParameterName.STATUS);
 
-        String path = pathCreator.getError();
-        String id = request.getParameter(ParameterName.ID_USER);
-
         User user = new User();
-        try{
-            if (valueChecker.isNumber(id) && valueChecker.isAdmin(idStatus)) {
-                user = adminService.getUserInformation(Integer.parseInt(id));
+        try {
+            if (valueChecker.isAnyUser(idStatus)){
+                user = userService.viewProfile(idUser);
                 attributesInitializer.setRequestAttributesUser(request, user);
-                path = pathCreator.getUserPage();
+                path = pathCreator.getEditProfile();
             } else {
                 path = pathCreator.getError();
             }
-        } catch (ServiceException e){
+        } catch (ServiceException e) {
             throw new CommandException(e);
         }
         return path;

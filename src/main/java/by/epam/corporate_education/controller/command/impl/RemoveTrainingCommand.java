@@ -10,6 +10,7 @@ import by.epam.corporate_education.controller.util.api.PathCreator;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.AdminService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ public class RemoveTrainingCommand implements Command {
         adminService = serviceFactory.getAdminServiceImpl();
     }
 
-    //annotation
+    @ConstructorForTest
     public RemoveTrainingCommand(AdminService adminService, ControllerUtilFactory utilFactory){
         this.adminService = adminService;
         this.utilFactory = utilFactory;

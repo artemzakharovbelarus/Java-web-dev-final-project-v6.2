@@ -4,6 +4,7 @@ import by.epam.corporate_education.dao.util.api.StatementInitializer;
 import by.epam.corporate_education.entity.Training;
 import by.epam.corporate_education.entity.User;
 
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -132,7 +133,7 @@ public class StatementInitializerImpl implements StatementInitializer {
     }
 
     @Override
-    public void initTrainingUpdating(PreparedStatement statement, Training training) throws SQLException {
+    public void initTrainingUpdating(PreparedStatement statement, Training training, InputStream stream) throws SQLException {
         statement.setString(1, training.getTitle());
         statement.setString(2, training.getRequirements());
         statement.setString(3, training.getInformation());
@@ -142,7 +143,7 @@ public class StatementInitializerImpl implements StatementInitializer {
         statement.setInt(7, training.getMaxMembers());
         statement.setDate(8, Date.valueOf(training.getStartDate()));
         statement.setDate(9, Date.valueOf(training.getEndDate()));
-        statement.setString(10, training.getTrainingPhoto());
+        statement.setBinaryStream(10, stream);
         statement.setInt(11, training.getIdTrainer());
         statement.setInt(12, training.getIdTraining());
     }

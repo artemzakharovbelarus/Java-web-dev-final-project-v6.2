@@ -66,4 +66,19 @@ public class Training implements Serializable {
         setTrainingPhoto(trainingPhoto);
         setIdTrainer(idTrainer);
     }
+
+    public Training(int idTraining, String title, String requirements, String information, String city,
+                    int hoursAmount, int minMembers, int maxMembers, LocalDate startDate, LocalDate endDate, int idTrainer){
+        setIdTraining(idTraining);
+        setTitle(title);
+        setRequirements(requirements);
+        setInformation(information);
+        setCity(city);
+        setHoursAmount(hoursAmount);
+        setMinMembers(minMembers);
+        setMaxMembers(maxMembers);
+        setStartDate(startDate);
+        setEndDate(endDate);
+        setIdTrainer(idTrainer);
+    }
 }

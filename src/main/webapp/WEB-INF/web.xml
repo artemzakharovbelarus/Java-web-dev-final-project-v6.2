@@ -78,6 +78,10 @@
         <filter-name>PageSecurityFilter</filter-name>
         <url-pattern>/training-queries</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>PageSecurityFilter</filter-name>
+        <url-pattern>/edit-profile</url-pattern>
+    </filter-mapping>
 
     <listener>
         <listener-class>by.epam.corporate_education.controller.ApplicationListener</listener-class>
@@ -224,6 +228,15 @@
     <servlet-mapping>
         <servlet-name>TrainingQueries</servlet-name>
         <url-pattern>/training-queries</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditProfile</servlet-name>
+        <jsp-file>/WEB-INF/jsp/edit-profile.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditProfile</servlet-name>
+        <url-pattern>/edit-profile</url-pattern>
     </servlet-mapping>
 
     <session-config>

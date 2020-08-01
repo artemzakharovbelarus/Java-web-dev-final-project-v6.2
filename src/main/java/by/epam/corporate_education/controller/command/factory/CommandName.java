@@ -10,8 +10,6 @@ public final class CommandName {
     public final static String COMMAND_SIGN_OUT = "sign-out";
     public final static String COMMAND_SIGN_UP = "sign-up";
     public final static String COMMAND_CHANGE_PASSWORD = "change-password";
-    public final static String COMMAND_REDIRECT_FORGOT_PASSWORD = "redirect-forgot-password";
-    public final static String COMMAND_REDIRECT_SIGN_UP = "redirect-sign-up";
     public final static String COMMAND_VIEW_ALL_TRAININGS = "view-all-trainings";
     public final static String COMMAND_VIEW_TRAINING = "view-training";
     public final static String COMMAND_FORWARD_TO_MAIN = "forward-to-main";
@@ -34,4 +32,7 @@ public final class CommandName {
     public final static String COMMAND_PUT_OFF_DISLIKE = "put-off-dislike";
     public final static String COMMAND_VIEW_TRAINING_QUERIES = "view-training-queries";
     public final static String COMMAND_SET_QUERY_ANSWER = "set-query-answer";
+    public final static String COMMAND_FORWARD_EDIT_PROFILE = "forward-edit-profile";
+    public final static String COMMAND_EDIT_PROFILE = "edit-profile";
+    public final static String COMMAND_VIEW_PROFILE = "view-profile";
 }

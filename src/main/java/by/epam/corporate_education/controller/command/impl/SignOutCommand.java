@@ -11,6 +11,7 @@ import by.epam.corporate_education.controller.util.api.PathCreator;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.UserService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ public class SignOutCommand implements Command {
         userService = serviceFactory.getUserServiceImpl();
     }
 
-    //annotation
+    @ConstructorForTest
     public SignOutCommand(UserService userService, ControllerUtilFactory utilFactory){
         this.userService = userService;
         this.utilFactory = utilFactory;
@@ -46,10 +47,9 @@ public class SignOutCommand implements Command {
 
         HttpSession session = request.getSession();
         Integer idUser = (Integer) session.getAttribute(ParameterName.ID_USER);
-        String onlineStatus = request.getParameter(ParameterName.ONLINE);
+        boolean onlineStatus = (boolean) session.getAttribute(ParameterName.ONLINE);
         try {
-                boolean onlineStatusBoolean = Boolean.parseBoolean(onlineStatus);
-                userService.signOut(idUser, onlineStatusBoolean);
+                userService.signOut(idUser, onlineStatus);
                 session.invalidate();
                 path = pathCreator.getSignIn();
         } catch (ServiceException e){

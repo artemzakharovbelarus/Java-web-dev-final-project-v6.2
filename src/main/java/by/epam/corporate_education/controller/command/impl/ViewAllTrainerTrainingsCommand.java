@@ -12,6 +12,7 @@ import by.epam.corporate_education.entity.Training;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.TrainerService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ public class ViewAllTrainerTrainingsCommand implements Command {
         trainerService = serviceFactory.getTrainerServiceImpl();
     }
 
-    //annotation
+    @ConstructorForTest
     public ViewAllTrainerTrainingsCommand(TrainerService trainerService, ControllerUtilFactory utilFactory){
         this.trainerService = trainerService;
         this.utilFactory = utilFactory;

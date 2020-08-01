@@ -15,7 +15,7 @@ public class AttributesInitializerImpl implements AttributesInitializer {
 
     @Override
     public void setRequestAttributesUser(HttpServletRequest request, User user) {
-        request.setAttribute("user", user);
+        request.setAttribute(ParameterName.USER, user);
     }
 
     @Override

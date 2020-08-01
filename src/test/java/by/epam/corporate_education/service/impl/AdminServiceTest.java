@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -102,7 +103,8 @@ public class AdminServiceTest {
             throws DAOException, ServiceException {
         //given
         //when
-        Mockito.doThrow(DAOException.class).when(trainingDAO).updateTraining(Mockito.any(Training.class));
+        Mockito.doThrow(DAOException.class).when(trainingDAO).
+                updateTraining(Mockito.any(Training.class), Mockito.any(InputStream.class));
         int idTraining = -2;
         String title = "title";
         String requirements = "req";
@@ -113,10 +115,10 @@ public class AdminServiceTest {
         int maxMembers = 2;
         String statDate = "2222-10-10";
         String endDate = "2222-10-10";
-        String trainingPhoto = "img";
+        InputStream image = Mockito.mock(InputStream.class);
         int idTrainer = 1;
         adminService.updateTrainingValues(idTraining, title, requirements, information, city, hoursAmount,
-                minMembers, maxMembers, LocalDate.parse(statDate), LocalDate.parse(endDate), trainingPhoto, idTrainer);
+                minMembers, maxMembers, LocalDate.parse(statDate), LocalDate.parse(endDate), image, idTrainer);
         //then
         //expected ServiceException
     }
@@ -124,7 +126,7 @@ public class AdminServiceTest {
     @Test
     public void updateTrainingValues_validParameters_void_correct() throws DAOException, ServiceException {
         //given
-        Mockito.doNothing().when(trainingDAO).updateTraining(Mockito.mock(Training.class));
+        Mockito.doNothing().when(trainingDAO).updateTraining(Mockito.mock(Training.class), Mockito.mock(InputStream.class));
         int idTraining = 1;
         String title = "title";
         String requirements = "req";
@@ -135,10 +137,10 @@ public class AdminServiceTest {
         int maxMembers = 2;
         String statDate = "2222-10-10";
         String endDate = "2222-10-10";
-        String trainingPhoto = "img";
+        InputStream image = null;
         int idTrainer = 1;
         adminService.updateTrainingValues(idTraining, title, requirements, information, city, hoursAmount,
-                minMembers, maxMembers, LocalDate.parse(statDate), LocalDate.parse(endDate), trainingPhoto, idTrainer);
+                minMembers, maxMembers, LocalDate.parse(statDate), LocalDate.parse(endDate), image, idTrainer);
         //then
     }
 

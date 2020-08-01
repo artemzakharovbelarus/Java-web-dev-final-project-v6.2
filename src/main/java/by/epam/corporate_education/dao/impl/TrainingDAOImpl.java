@@ -9,6 +9,7 @@ import by.epam.corporate_education.dao.util.api.*;
 import by.epam.corporate_education.entity.Training;
 import lombok.extern.log4j.Log4j;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -182,7 +183,7 @@ public class TrainingDAOImpl implements TrainingDAO {
     }
 
     @Override
-    public void updateTraining(Training training) throws DAOException {
+    public void updateTraining(Training training, InputStream stream) throws DAOException {
         String request = SQLRequest.UPDATE_TRAINING_VALUES;
 
         Connection connection = null;
@@ -191,7 +192,7 @@ public class TrainingDAOImpl implements TrainingDAO {
             connection = connectionPool.takeConnection();
             statement = connection.prepareStatement(request);
 
-            statementInitializer.initTrainingUpdating(statement, training);
+            statementInitializer.initTrainingUpdating(statement, training, stream);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException(e);

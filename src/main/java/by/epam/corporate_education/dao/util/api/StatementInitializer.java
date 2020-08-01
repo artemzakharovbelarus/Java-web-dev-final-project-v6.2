@@ -3,6 +3,7 @@ package by.epam.corporate_education.dao.util.api;
 import by.epam.corporate_education.entity.Training;
 import by.epam.corporate_education.entity.User;
 
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ public interface StatementInitializer {
     public void initUserInfo(PreparedStatement statement, int value) throws SQLException;
     public void initTrainingId(PreparedStatement statement, int value) throws SQLException;
     public void initTrainingDeleted(PreparedStatement statement, boolean value, int value2) throws SQLException;
-    public void initTrainingUpdating(PreparedStatement statement, Training training) throws SQLException;
+    public void initTrainingUpdating(PreparedStatement statement, Training training, InputStream stream) throws SQLException;
     public void initChecker(PreparedStatement statement, String value) throws SQLException;
     public void initQuery(PreparedStatement statement, int value, int value2) throws SQLException;
     public void initQuery(PreparedStatement statement, int value) throws SQLException;

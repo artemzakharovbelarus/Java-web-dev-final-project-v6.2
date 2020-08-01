@@ -10,6 +10,7 @@ import by.epam.corporate_education.controller.util.api.PathCreator;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.UserService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,7 @@ public class UndoQueryCommand implements Command {
         userService = serviceFactory.getUserServiceImpl();
     }
 
-    //annotation
+    @ConstructorForTest
     public UndoQueryCommand(UserService userService, ControllerUtilFactory utilFactory){
         this.userService = userService;
         this.utilFactory = utilFactory;
@@ -50,7 +51,7 @@ public class UndoQueryCommand implements Command {
             if (controllerValueChecker.isNumber(idQuery)) {
                 int idQueryInt = Integer.parseInt(idQuery);
                 userService.undoQuery(idQueryInt);
-                path = pathCreator.getForwardQueries(request.getContextPath(), idUser);
+                path = pathCreator.getForwardQueries(request.getContextPath());
             }
         } catch (ServiceException e){
             throw new CommandException(e);

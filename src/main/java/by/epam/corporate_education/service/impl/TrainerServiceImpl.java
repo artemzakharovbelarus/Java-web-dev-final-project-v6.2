@@ -8,6 +8,7 @@ import by.epam.corporate_education.entity.Query;
 import by.epam.corporate_education.entity.Training;
 import by.epam.corporate_education.service.api.TrainerService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class TrainerServiceImpl implements TrainerService {
 
     public TrainerServiceImpl(){}
 
-    //annotation
+    @ConstructorForTest
     public TrainerServiceImpl(QueryDAO queryDAO, TrainingDAO trainingDAO){
         this.queryDAO = queryDAO;
         this.trainingDAO = trainingDAO;

@@ -7,6 +7,7 @@ import by.epam.corporate_education.controller.util.ParameterName;
 import by.epam.corporate_education.controller.util.api.AttributesInitializer;
 import by.epam.corporate_education.controller.util.api.HttpRequestResponseKeeper;
 import by.epam.corporate_education.controller.util.api.PathCreator;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ public class ChangeLocaleCommand implements Command {
     public ChangeLocaleCommand(){
     }
 
-    //annotation
+    @ConstructorForTest
     public ChangeLocaleCommand(ControllerUtilFactory utilFactory){
         this.utilFactory = utilFactory;
     }

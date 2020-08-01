@@ -12,6 +12,7 @@ import by.epam.corporate_education.entity.Training;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.UserService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,7 @@ public class ForwardQueryTrainingCommand implements Command {
         userService = serviceFactory.getUserServiceImpl();
     }
 
-    //annotation
+    @ConstructorForTest
     public ForwardQueryTrainingCommand(UserService userService, ControllerUtilFactory utilFactory){
         this.userService = userService;
         this.utilFactory = utilFactory;
@@ -55,7 +56,7 @@ public class ForwardQueryTrainingCommand implements Command {
                 int idTrainingInt = Integer.parseInt(idTraining);
                 training = userService.getTraining(idTrainingInt);
                 attributesInitializer.setRequestAttributesTraining(request, training);
-                path = pathCreator.getForwardEnrollTraining();
+                path = pathCreator.getEnrollTraining();
             } else {
                 path = pathCreator.getError();
             }

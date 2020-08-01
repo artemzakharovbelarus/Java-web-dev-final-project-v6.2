@@ -10,9 +10,8 @@ import by.epam.corporate_education.service.util.ServiceUtilFactory;
 import by.epam.corporate_education.service.util.ValidatorManager;
 import by.epam.corporate_education.service.util.api.PasswordEncoder;
 import by.epam.corporate_education.service.util.api.UserValidator;
-import lombok.Setter;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(){}
 
-    //annotation
+    @ConstructorForTest
     public UserServiceImpl(ServiceUtilFactory utilFactory, LikeDAO likeDAO, DislikeDAO dislikeDAO, QueryDAO queryDAO,
                            UserDAO userDAO, NewsDAO newsDAO, TrainingDAO trainingDAO){
         this.utilFactory = utilFactory;
@@ -42,6 +41,17 @@ public class UserServiceImpl implements UserService {
         this.userDAO = userDAO;
         this.newsDAO = newsDAO;
         this.trainingDAO = trainingDAO;
+    }
+
+    @Override
+    public User viewProfile(int idUser) throws ServiceException {
+        User user = new User();
+        try {
+            user = userDAO.getAllUserInformation(idUser);
+        } catch (DAOException e){
+            throw new ServiceException(e);
+        }
+        return user;
     }
 
     @Override

@@ -6,8 +6,8 @@ public interface PathCreator {
     public String getChangeLocale(String contextPath);
     public String getViewTraining(String contextPath, int idTraining);
     public String getEnrolTraining(String contextPath, int idTraining);
-    public String getForwardEditTraining();
-    public String getForwardEnrollTraining();
+    public String getEditTraining();
+    public String getEnrollTraining();
     public String getMainPage();
     public String getForwardForgotPassword();
     public String getForwardSignUp();
@@ -15,7 +15,7 @@ public interface PathCreator {
     public String getForwardMainPage(String contextPath);
     public String getSignIn();
     public String getSignUp();
-    public String getForwardQueries(String contextPath, int idUser);
+    public String getForwardQueries(String contextPath);
     public String getQueries();
     public String getTrainingPage();
     public String getUserPage();
@@ -25,4 +25,8 @@ public interface PathCreator {
     public String getTrainingQueries();
     public String getForgotPassword();
     public String getTrainerTrainings();
+    public String getForwardTrainerTrainings(String contextPath);
+    public String getForwardViewProfile(String contextPath);
+    public String getEditProfile();
+    public String getForwardEditProfile(String contextPath);
 }

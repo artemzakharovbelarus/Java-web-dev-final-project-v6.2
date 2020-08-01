@@ -10,9 +10,14 @@ import by.epam.corporate_education.controller.util.api.PathCreator;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.AdminService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 
 public class EditTrainingCommand implements Command {
@@ -25,7 +30,7 @@ public class EditTrainingCommand implements Command {
         adminService = serviceFactory.getAdminServiceImpl();
     }
 
-    //annotation
+    @ConstructorForTest
     public EditTrainingCommand(AdminService adminService, ControllerUtilFactory utilFactory){
         this.adminService = adminService;
         this.utilFactory = utilFactory;
@@ -53,18 +58,28 @@ public class EditTrainingCommand implements Command {
         LocalDate startDate = LocalDate.parse(request.getParameter(ParameterName.START_DATE));
         LocalDate endDate = LocalDate.parse(request.getParameter(ParameterName.END_DATE));
         int idTrainer = Integer.parseInt(request.getParameter(ParameterName.ID_TRAINER));
-        String trainingPhoto = request.getParameter(ParameterName.TRAINING_PHOTO);
 
         try{
+            Part filePart = request.getPart(ParameterName.TRAINING_PHOTO);
+            InputStream trainingPhoto = getStreamWithImage(filePart);
+
             if (controllerValueChecker.isNumber(idTraining)){
                 int idTrainingInt = Integer.parseInt(idTraining);
                 adminService.updateTrainingValues(idTrainingInt, title, requirements, information, city, hoursAmount,
                         minMembers, maxMembers, startDate, endDate, trainingPhoto, idTrainer);
                 path = pathCreator.getViewTraining(request.getContextPath(), idTrainingInt);
             }
-        } catch (ServiceException e){
+        } catch (ServiceException | IOException | ServletException e){
             throw new CommandException(e);
         }
         return path;
+    }
+
+    private InputStream getStreamWithImage(Part part) throws IOException {
+        InputStream stream = null;
+        if (part != null){
+            stream =  part.getInputStream();
+        }
+        return stream;
     }
 }

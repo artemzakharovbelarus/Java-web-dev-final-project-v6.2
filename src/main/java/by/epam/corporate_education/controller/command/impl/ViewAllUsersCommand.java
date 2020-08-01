@@ -12,6 +12,7 @@ import by.epam.corporate_education.entity.User;
 import by.epam.corporate_education.service.ServiceFactory;
 import by.epam.corporate_education.service.api.AdminService;
 import by.epam.corporate_education.service.exception.ServiceException;
+import by.epam.corporate_education.util.annotation.ConstructorForTest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ public class ViewAllUsersCommand implements Command {
         adminService = serviceFactory.getAdminServiceImpl();
     }
 
-    //annotation
+    @ConstructorForTest
     public ViewAllUsersCommand(AdminService adminService, ControllerUtilFactory utilFactory){
         this.adminService = adminService;
         this.utilFactory = utilFactory;

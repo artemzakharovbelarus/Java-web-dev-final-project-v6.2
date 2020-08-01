@@ -17,6 +17,9 @@ import org.mockito.Mockito;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import java.lang.reflect.Parameter;
 
 import static org.junit.Assert.*;
 
@@ -41,6 +44,9 @@ public class ForwardEditTrainingCommandTest {
     public void execute_serviceExceptionFromGetTraining_errorPath() throws ServiceException, CommandException {
         //given
         //when
+        HttpSession session = Mockito.mock(HttpSession.class);
+        Mockito.when(request.getSession()).thenReturn(session);
+        Mockito.when(session.getAttribute(ParameterName.STATUS)).thenReturn(1);
         Mockito.when(request.getParameter(ParameterName.ID_TRAINING)).thenReturn("1");
         Mockito.doThrow(ServiceException.class).when(userService).getTraining(Mockito.anyInt());
         String result = command.execute();
@@ -53,12 +59,15 @@ public class ForwardEditTrainingCommandTest {
     public void execute_validParameter_forwardEditPath() throws ServiceException, CommandException {
         //given
         //when
+        HttpSession session = Mockito.mock(HttpSession.class);
+        Mockito.when(request.getSession()).thenReturn(session);
+        Mockito.when(session.getAttribute(ParameterName.STATUS)).thenReturn(1);
         Mockito.when(request.getParameter(ParameterName.ID_TRAINING)).thenReturn("1");
         Training training = Mockito.mock(Training.class);
         Mockito.doReturn(training).when(userService).getTraining(Mockito.anyInt());
         String result = command.execute();
         //then
-        String expected = pathCreator.getForwardEditTraining();
+        String expected = pathCreator.getEditTraining();
         assertEquals(expected, result);
     }
 }

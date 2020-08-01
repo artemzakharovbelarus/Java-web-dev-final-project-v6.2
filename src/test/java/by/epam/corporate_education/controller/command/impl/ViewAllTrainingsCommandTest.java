@@ -3,6 +3,7 @@ package by.epam.corporate_education.controller.command.impl;
 import by.epam.corporate_education.controller.command.Command;
 import by.epam.corporate_education.controller.command.CommandException;
 import by.epam.corporate_education.controller.util.ControllerUtilFactory;
+import by.epam.corporate_education.controller.util.ParameterName;
 import by.epam.corporate_education.controller.util.api.HttpRequestResponseKeeper;
 import by.epam.corporate_education.controller.util.api.PathCreator;
 import by.epam.corporate_education.controller.util.impl.HttpRequestResponseKeeperImpl;
@@ -16,6 +17,7 @@ import org.mockito.Mockito;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.util.List;
 
@@ -43,6 +45,9 @@ public class ViewAllTrainingsCommandTest {
             throws ServiceException, CommandException {
         //given
         //when
+        HttpSession session = Mockito.mock(HttpSession.class);
+        Mockito.when(request.getSession()).thenReturn(session);
+        Mockito.when(session.getAttribute(ParameterName.STATUS)).thenReturn(1);
         Mockito.doThrow(ServiceException.class).when(userService).viewAllTrainings();
         String result = command.execute();
         //then
@@ -55,6 +60,9 @@ public class ViewAllTrainingsCommandTest {
             throws ServiceException, CommandException {
         //given
         //when
+        HttpSession session = Mockito.mock(HttpSession.class);
+        Mockito.when(request.getSession()).thenReturn(session);
+        Mockito.when(session.getAttribute(ParameterName.STATUS)).thenReturn(1);
         List<Training> trainings = (List<Training>) Mockito.mock(List.class);
         Mockito.doReturn(trainings).when(userService).viewAllTrainings();
         String result = command.execute();

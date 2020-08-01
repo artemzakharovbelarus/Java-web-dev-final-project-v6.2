@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ParameterName {
     public final static String COMMAND = "command";
+    public final static String USER = "user";
+    public final static String ENCODING = "UTF-8";
+    public final static String ENCODING_FILTER = "EncodingFilter";
     public final static String ID_USER = "idUser";
     public final static String BANN = "bann";
     public final static String LOCALE = "locale";
@@ -20,6 +23,7 @@ public final class ParameterName {
     public final static String START_DATE = "start-date";
     public final static String END_DATE = "end-date";
     public final static String ID_TRAINER = "idTrainer";
+    public final static String FILE = "file";
     public final static String TRAINING_PHOTO = "training-photo";
     public final static String ID_QUERY = "idQuery";
     public final static String ANSWER = "answer";
